@@ -1,0 +1,171 @@
+FINDING 26 — THE NODE FEATURES DO CARRY SIGNAL; FINDING 06 WAS A BASIS ARTEFACT
+================================================================================
+Status: measured, decisive, SUPERSEDES FINDING 06
+Date:   2026-09-01
+Raw:    results/pca_basis_test.json
+Code:   scripts/run_pca_basis_test.py
+Origin: reviewer question 1 (per-subject PCA alignment)
+
+
+WHAT FINDING 06 CLAIMED
+-----------------------
+"The per-region features contain no diagnostic information. Not compressed
+information, not information the graph fails to exploit -- none."
+
+  quantum latents, all 200 regions        AUC 0.459
+  correlation profile (19,900-d)          AUC 0.693
+
+That conclusion drove the whole root-cause narrative of the ABIDE graph study:
+the graph sits at chance because its inputs are empty.
+
+
+WHAT WAS ACTUALLY WRONG
+-----------------------
+compress_connectivity_profiles() fits a separate PCA for every subject. Region
+i's feature vector is its connectivity profile projected onto THAT SUBJECT'S
+principal axes. Component 3 means something different for every subject, so a
+classifier comparing component 3 across subjects is comparing incommensurable
+quantities. The signal was never absent; it was rotated into a different frame
+per subject.
+
+Nothing about this is specific to the quantum arm. It affects every model that
+consumes per-region node features, including the classical GCN baselines, which
+is why they sit at chance too.
+
+
+THE TEST
+--------
+Identical leave-site-out folds, 1035 subjects, 20 sites, linear SVM on
+flattened node features. Three feature constructions:
+
+  per-subject   PCA fitted on each subject's own profiles (what we used)
+  fold-wise     one PCA basis fitted on TRAINING-SITE profiles only, applied
+                unchanged to the held-out site
+  ceiling       flattened correlation upper triangle, 19,900-d, no compression
+
+  arm            mean AUC        folds > 0.60
+  ------------   -------------   ------------
+  per-subject    0.541 +- 0.070      6 / 20
+  fold-wise      0.739 +- 0.095     19 / 20
+  ceiling        0.733 +- 0.090     18 / 20
+
+  fold-wise vs per-subject   +0.198 AUC   p = 9.5e-06   wins 18/20 sites
+  fold-wise vs ceiling       +0.006 AUC   p = 0.93      wins 10/20 sites
+
+
+WHAT THIS MEANS
+---------------
+1. FINDING 06 IS FALSIFIED. Per-region node features carry the diagnostic
+   signal. Sixteen components per region in a shared basis are statistically
+   indistinguishable from the full 19,900-dimensional correlation vector
+   (p = 0.93), so the compression loses nothing that matters.
+
+2. THE ABIDE GRAPH RESULTS ARE CONFOUNDED. Every conclusion in Section V that
+   rests on "the graph pipeline sits at chance because its node features are
+   empty" is unsupported. The features were fine; the basis was not. The graph
+   experiments must be re-run with fold-wise features before anything can be
+   concluded about the graph architecture.
+
+3. THE SCOPE IS LIMITED TO THE GRAPH STUDY. The model suite (QCNN, VQC, QSVMs,
+   TQEK and their matched classical arms), Plans A/B/C, the low-data test and
+   the calibration test all consume build_descriptors() output -- graph-theoretic
+   summaries or the raw correlation vector -- with feature selection and scaling
+   fitted on training sites only. None of them touches
+   compress_connectivity_profiles. The 284 matched comparisons, the QCNN result,
+   the kernel tie and the overfitting result are unaffected.
+
+4. THE FIDELITY CONCENTRATION RESULT IS UNAFFECTED. It is measured on the
+   quantum states themselves, not on downstream accuracy, and the collapse at
+   16 qubits is a property of the encoding independent of what the features
+   mean.
+
+5. THE INVARIANCE DERIVATION IS UNAFFECTED. It is algebraic.
+
+
+WHY IT WAS MISSED
+-----------------
+The docstring of compress_region_timeseries says the PCA yields "a compact
+temporal signature in a shared component basis", and that is true -- the basis
+is shared across REGIONS within a subject, which is what the fidelity kernel
+needs, since it only ever compares regions of the same subject. It is not
+shared across subjects, which is what the downstream classifier needs. Both
+statements are correct and only one of them was checked.
+
+FINDING 06 tested the features directly and found chance, which looked like
+confirmation. It could not distinguish "no signal" from "signal in an
+incomparable frame", and we read it as the former.
+
+
+WHAT TO DO NEXT
+---------------
+- Re-run run_abide_study.py with a fold-wise basis fitted inside each LSO fold.
+- Revise Section V: the root-cause claim, the topology ablation reading, and
+  the classification-performance narrative all depend on FINDING 06.
+- Keep Sections VI-IX as they stand.
+
+
+================================================================================
+PART 2 — THE GRAPH RE-RUN. CORRECTED FEATURES DO NOT RESCUE THE PIPELINE.
+================================================================================
+Raw:  results/graph_foldwise_q8.json, results/graph_foldwise_q8.log
+Code: scripts/run_graph_foldwise.py
+
+The basis is now fitted on the training sites of each leave-site-out fold and
+applied unchanged to the held-out site. Encoder, topology, k=20, model, epochs
+and seed are identical to the original run. Eight qubits, the width used
+everywhere else in the paper and the width at which fidelity is still usable.
+
+  model                        accuracy        F1              one-class folds
+  --------------------------   -------------   -------------   ---------------
+  Proposed (quantum + GAT)     0.504 +- 0.028  0.196 +- 0.135      20 / 20
+  Ablation  (quantum + GCN)    0.512 +- 0.027  0.133 +- 0.119      20 / 20
+
+  majority class                       0.512
+  original run, per-subject basis      0.506
+  linear SVM on the SAME fold-wise features   AUC 0.739
+
+TWO THINGS FOLLOW, AND THEY POINT IN OPPOSITE DIRECTIONS.
+
+1. The reviewer's confound is real and PART 1 stands. The node features carry
+   the signal once the basis is shared, and FINDING 06's root-cause claim is
+   retracted.
+
+2. Correcting it does not move the graph pipeline. Given features a linear SVM
+   reads at AUC 0.739, the GAT returns 0.504 and the GCN 0.512, both at the
+   majority rate. The failure is downstream of the node features.
+
+THE GRAPH RESULT IS NOT A MEASUREMENT.
+Every fold, for both models, is a degenerate single-class predictor:
+specificity is exactly 1.000 or exactly 0.000, twenty times out of twenty. The
+model predicts one class for every subject in the held-out site and its
+accuracy is the majority rate by construction. This is precisely what the
+degeneracy screen of FINDING 24 was built to reject, and it rejects this.
+
+IT IS NOT A TRAINING-LENGTH ARTEFACT.
+MAD collapsing toward zero suggested over-smoothing, which would be tunable.
+Holding features and folds fixed and varying only epochs:
+
+  site      3 epochs              10 epochs             30 epochs
+  -------   -------------------   -------------------   -------------------
+  OHSU      acc 0.538  F1 0.000   acc 0.462  F1 0.632   acc 0.462  F1 0.632
+  OLIN      acc 0.441  F1 0.000   acc 0.441  F1 0.000   acc 0.559  F1 0.717
+  PITT      acc 0.518  F1 0.682   acc 0.482  F1 0.000   acc 0.518  F1 0.682
+
+Degenerate at every epoch count, flipping between all-positive and
+all-negative without ever discriminating. More training does not help and less
+training does not either.
+
+WHAT CAN HONESTLY BE CLAIMED
+  - The node features carry the diagnostic signal (PART 1, measured).
+  - The graph pipeline as implemented cannot use them (PART 2, measured).
+  - WHY it cannot is open. With 20/20 folds degenerate we can say the
+    classifier fails to train on this graph, and we cannot attribute that to
+    the topology, the propagation or the read-out without further work.
+
+WHAT WAS NOT RUN, AND WHY
+A 16-qubit version was started for like-for-like comparison with the original
+run and stopped at 14/20 folds. At that width fidelity is degenerate by
+FINDING 01, so the topology carries nothing regardless of feature quality and
+the run could only reproduce "graph at chance" for a second, already-documented
+reason. Its partial output agrees with the 8-qubit run: accuracy 0.515, 14/14
+folds one-class.

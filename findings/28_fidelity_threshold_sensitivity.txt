@@ -1,0 +1,28 @@
+Same method as findings/01 (20 ABIDE I subjects, connectivity profiles, encoder seed 0).
+pairs: median undirected pairs with F > tau (of 19,900); knn: median share of a fidelity-only k=20 graph's 4,000 directed edges with F > tau;
+nodes: median share of regions with at least 20 neighbours above tau; distinct: median undirected pairs a k=20 graph actually uses
+
+ 4 qubits  (random-state baseline 1/2^n = 6.2e-02; mean F 0.0652; distinct pairs used by k=20 graph: median 2247)
+    tau 0.001  pairs  14184   knn edges above 100.0%   regions with 20 above 100.0%
+    tau 0.003  pairs  12213   knn edges above 100.0%   regions with 20 above 100.0%
+    tau 0.01   pairs   9575   knn edges above 100.0%   regions with 20 above 100.0%
+    tau 0.03   pairs   6824   knn edges above 100.0%   regions with 20 above 100.0%
+    tau 0.1    pairs   3703   knn edges above 100.0%   regions with 20 above 100.0%
+ 8 qubits  (random-state baseline 1/2^n = 3.9e-03; mean F 0.0083; distinct pairs used by k=20 graph: median 2415)
+    tau 0.001  pairs   5918   knn edges above 100.0%   regions with 20 above 100.0%
+    tau 0.003  pairs   4045   knn edges above 99.5%   regions with 20 above 97.5%
+    tau 0.01   pairs   2336   knn edges above 89.4%   regions with 20 above 64.5%
+    tau 0.03   pairs   1169   knn edges above 56.8%   regions with 20 above  8.2%
+    tau 0.1    pairs    342   knn edges above 17.1%   regions with 20 above  0.0%
+12 qubits  (random-state baseline 1/2^n = 2.4e-04; mean F 0.0037; distinct pairs used by k=20 graph: median 2511)
+    tau 0.001  pairs   3517   knn edges above 96.1%   regions with 20 above 86.3%
+    tau 0.003  pairs   2246   knn edges above 81.6%   regions with 20 above 51.8%
+    tau 0.01   pairs   1108   knn edges above 52.1%   regions with 20 above 12.0%
+    tau 0.03   pairs    446   knn edges above 22.3%   regions with 20 above  0.0%
+    tau 0.1    pairs     99   knn edges above  4.9%   regions with 20 above  0.0%
+16 qubits  (random-state baseline 1/2^n = 1.5e-05; mean F 0.0027; distinct pairs used by k=20 graph: median 2546)
+    tau 0.001  pairs   2853   knn edges above 90.0%   regions with 20 above 69.5%
+    tau 0.003  pairs   1712   knn edges above 68.8%   regions with 20 above 34.3%
+    tau 0.01   pairs    787   knn edges above 38.7%   regions with 20 above  3.5%
+    tau 0.03   pairs    286   knn edges above 14.3%   regions with 20 above  0.0%
+    tau 0.1    pairs     61   knn edges above  3.1%   regions with 20 above  0.0%

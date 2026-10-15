@@ -1,0 +1,174 @@
+FINDING 01 — QUANTUM FIDELITY CONCENTRATES WITH REGISTER WIDTH
+==============================================================
+Status:  measured, reproducible
+Date:    2026-08-15; revised 2026-09-16 (see REVISION HISTORY)
+Code:    src/qagta/quantum/fmri_encoder.py, src/qagta/quantum/fidelity.py
+Data:    ABIDE I, CC200 / C-PAC filt_noglobal, 20 subjects
+Feature mode: connectivity profiles (compress_connectivity_profiles), the
+         parameterisation the graph pipeline actually consumes
+
+
+CLAIM
+-----
+Quantum state fidelity |<psi_i|psi_j>|^2 between regional embeddings loses the
+bulk of its dynamic range as the qubit register widens, until too few region
+pairs remain above a usable floor to populate the graph the method builds.
+
+At 16 qubits — the width the source manuscript specified — a median of 787 of
+the 19,900 region pairs exceed a fidelity of 0.01. A k = 20 neighbourhood over
+200 regions draws on at least kN/2 = 2,000 distinct pairs, so the k-NN step is
+selecting neighbours it does not have. Eight qubits supplies a median of 2,336
+and is the widest register that clears the budget.
+
+
+MEASUREMENT
+-----------
+20 ABIDE subjects, 200 CC200 regions each, ring-entangled encoder (seed 0),
+fidelity over all 19,900 region pairs, per-subject values then averaged:
+
+  qubits   Hilbert dim   mean fidelity   max      pairs > 0.01   median count
+  ------   -----------   -------------   ------   ------------   ------------
+  4        16            0.0652          0.980    48.4%           9,575
+  8        256           0.0083          0.793    12.6%           2,336
+  12       4,096         0.0037          0.703     6.1%           1,108
+  16       65,536        0.0027          0.675     4.4%             787
+
+Two features of this table matter and only one was noticed originally:
+
+  1. The MEAN collapses by a factor of 24 and crosses the 0.01 floor between
+     four and eight qubits.
+  2. The MAXIMUM barely moves, 0.980 -> 0.675. A thin tail of strongly
+     overlapping pairs survives at every width. The matrix does not become
+     uniformly orthogonal; its bulk does.
+
+Downstream numbers from the original (temporal-mode) run, NOT re-measured under
+connectivity features — treat as unverified:
+  edge weights after k-NN sparsification   mean 0.0016
+  node-feature MAD after propagation       0.003   (manuscript reports 0.45)
+
+
+MECHANISM
+---------
+Measure concentration. The parcellation yields 200 regional states; a
+65,536-dimensional Hilbert space has vastly more room than 200 states can
+populate, so the typical pairwise overlap falls toward zero. This is the
+concentration-of-measure problem in quantum kernels, the same effect that
+produces barren plateaus in variational circuits [Cerezo 2021, McClean 2018,
+Thanasilp 2024].
+
+Concentration alone is not the defect. The defect is the interaction between
+concentration and the fixed k of the graph construction: the graph demands a
+constant number of edges per node while the supply of usable pairs falls with
+width.
+
+
+WHERE THIS CONTRADICTS THE SOURCE MANUSCRIPT
+--------------------------------------------
+Section III-C of the source manuscript treats near-orthogonality as a benefit:
+
+  "in high-dimensional Hilbert spaces, unrelated vectors tend to be close to
+   orthogonal ... Low-relevance noise connections therefore land near zero
+   fidelity by default, while genuine structural relationships stand out,
+   giving a naturally sparser and cleaner adjacency matrix."
+
+The measurement shows the mechanism runs out of operating room before 16
+qubits. Orthogonality is selective only while enough pairs remain
+non-orthogonal to fill the neighbourhood; past eight qubits they do not, so the
+claimed average degree of k ~ 25 with visible DMN/ECN block structure cannot
+arise at the specified width.
+
+
+IMPLICATION FOR THE PAPER
+-------------------------
+Publishable in its own right, as a design constraint with a measured curve and
+an explicit budget. For N regions and a k-nearest-neighbour graph, the register
+must be narrow enough that the pairs above the usability floor outnumber kN/2.
+On these data that places the operating point at 4-8 qubits.
+
+Recommended framing: report the curve, state the budget, and cite the
+concentration literature. Do not claim high-dimensional Hilbert space as an
+unqualified advantage, and do not claim the metric is destroyed — it is starved,
+which is a narrower and defensible statement.
+
+
+REVISION HISTORY
+----------------
+2026-09-16. Both the CLAIM and the MEASUREMENT table were wrong as first
+written, in two independent ways.
+
+  (a) FEATURE MODE. The original table was produced with
+      compress_region_timeseries (per-region temporal features), which the
+      paper later identifies as an artefact and replaces with connectivity
+      profiles. The superseded temporal-mode values were:
+
+        qubits   mean      max     pairs > 0.01
+        4        0.0624    0.970   47.5%
+        8        0.0039    0.662    7.4%
+        12       0.0003    0.144    0.6%
+        16       0.0000    0.023    0.0%
+
+      Those came from a single subject, not a cohort.
+
+  (b) A FALSE CLAIM. The original stated "no pair of brain regions has fidelity
+      above 0.01" at 16 qubits. This was false under either feature mode, and
+      self-contradicting even within the old table: a maximum of 0.023 cannot
+      coexist with zero pairs above 0.01. Under temporal features the true
+      share was 0.0101% (a median of 3 pairs per subject, range 1-6); under
+      connectivity features it is 4.4%. The "0.0%" entry was a rounding of
+      0.0101% to one decimal place, and was propagated into the manuscript and
+      into the figure generator as a hardcoded constant.
+
+The figure generator now computes this panel from data rather than restating
+constants: paper-tex/sept-12-support/figure-src/make_combined_figures.py,
+fig_c1_fidelity().
+
+
+REFERENCES
+----------
+[1] Havlicek V., Corcoles A.D., Temme K., Harrow A.W., Kandala A., Chow J.M.,
+    Gambetta J.M. "Supervised learning with quantum-enhanced feature spaces."
+    Nature 567:209-212, 2019.
+
+[2] Schuld M., Killoran N. "Quantum machine learning in feature Hilbert
+    spaces." Physical Review Letters 122:040504, 2019.
+
+[3] Thanasilp S., Wang S., Cerezo M., Holmes Z. "Exponential concentration in
+    quantum kernel methods." Nature Communications 15:5200, 2024.
+
+[4] Cerezo M., Sone A., Volkoff T., Cincio L., Coles P.J. "Cost function
+    dependent barren plateaus in shallow parametrized quantum circuits."
+    Nature Communications 12:1791, 2021.
+
+[5] McClean J.R., Boixo S., Smelyanskiy V.N., Babbush R., Neven H. "Barren
+    plateaus in quantum neural network training landscapes." Nature
+    Communications 9:4812, 2018.
+
+[6] Craddock R.C., James G.A., Holtzheimer P.E., Hu X.P., Mayberg H.S. "A whole
+    brain fMRI atlas generated via spatially constrained spectral clustering."
+    Human Brain Mapping 33:1914-1928, 2012.  [CC200 atlas]
+
+
+REPRODUCE
+---------
+  cd github && PYTHONPATH=src ../.venv/bin/python - <<'PY'
+  import glob, torch, numpy as np
+  from qagta.data.abide import compress_connectivity_profiles
+  from qagta.quantum.fidelity import pairwise_fidelity
+  from qagta.quantum.fmri_encoder import RingEntangledEncoder
+
+  files = sorted(glob.glob("data/ABIDE-I/ABIDE_pcp/cpac/filt_noglobal/*.1D"))[:20]
+  for nq in (4, 8, 12, 16):
+      ms, xs, ct = [], [], []
+      for f in files:
+          feats, _ = compress_connectivity_profiles(np.loadtxt(f), nq)
+          torch.manual_seed(0)
+          enc = RingEntangledEncoder(nq)
+          with torch.no_grad():
+              _, st = enc(torch.as_tensor(feats), return_state=True)
+              fid = pairwise_fidelity(st)
+          off = fid[~torch.eye(fid.shape[0], dtype=bool)]
+          ms.append(float(off.mean())); xs.append(float(off.max()))
+          ct.append(int((off > 0.01).sum()) // 2)
+      print(f"{nq:2d}  mean {np.mean(ms):.4f}  max {np.mean(xs):.3f}  "
+            f"median pairs>0.01 {int(np.median(ct))}")
+  PY

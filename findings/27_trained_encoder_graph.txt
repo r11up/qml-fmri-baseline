@@ -1,0 +1,91 @@
+FINDING 27 — TRAINING THE ENCODER DOES NOT RESCUE THE GRAPH PIPELINE
+=====================================================================
+Status: measured, 20 of 20 ABIDE I site folds
+Date:   2026-09-19
+Code:   scripts/run_graph_trained_encoder.py
+Output: results/graph_trained_encoder_q8.json
+
+
+WHY
+---
+The reported graph runs (run_abide_study.py, run_graph_foldwise.py) evaluate
+the encoder once, under torch.no_grad(), at its initial parameters (every
+encoding gain = 1), select the top-k support from that single encoding, and
+cache both. Only the GAT/GCN and the edge kernel (alpha, beta, pair MLP) are
+optimised. The manuscript described the encoder as trained, so the negative
+graph result did not yet cover the architecture as described.
+
+
+WHAT WAS RUN
+------------
+Settings: ABIDE I, 8 qubits, fold-wise PCA basis, mixed seed kernel, k = 20,
+30 epochs, Adam lr 0.01 with weight decay 5e-4, seed 0. The settings match
+results/graph_foldwise_q8.json.
+
+Two arms per fold go through identical code, folds and seeds:
+
+  frozen   encoder fixed at initialisation, support selected once
+           (the reported configuration)
+  trained  encoder gains and angles in the optimiser, receiving gradients
+           through the Pauli-Z latents; top-k support re-selected from the
+           current encoder at the start of every epoch; held-out support
+           selected with the final encoder
+
+Sanity check: the frozen arm reproduces graph_foldwise_q8.json exactly on
+20/20 folds for the GCN and 19/20 for the GAT.
+
+
+RESULT (mean +- 95% CI over 20 site folds)
+------------------------------------------
+                    acc            F1             AUC            MCC             train acc  single-class
+  GAT, frozen       0.503+-0.028   0.225+-0.139   0.486+-0.024   0.000+-0.000*   0.506      19/20
+  GAT, trained      0.513+-0.036   0.237+-0.130   0.519+-0.045   0.010+-0.055    0.522      14/20
+  GCN, frozen       0.512+-0.027   0.133+-0.119   0.500+-0.000   0.000+-0.000    0.507      20/20
+  GCN, trained      0.512+-0.027   0.133+-0.119   0.500+-0.000   0.000+-0.000    0.507      20/20
+  (* published re-run value)
+
+Trained minus frozen, GAT:
+  accuracy  median +0.000, mean +0.010, p = 0.67 (paired Wilcoxon)
+  AUC       mean +0.033, p = 0.21
+  trained AUC against 0.5: p = 0.38
+
+GCN: trained and frozen predictions are identical on every fold.
+
+What moved:
+  mean |gain change|       0.83 (GAT), 0.96 (GCN)
+  support edges replaced   about 80% (train), 79-82% (test)
+
+What did not move:
+  training accuracy stays at the share of controls in the training set,
+  so the classifier never fits even its training data
+
+
+INTERPRETATION
+--------------
+Training the encoder changes the graph substantially and the outcome not at
+all. The collapse to a single predicted class survives four conditions:
+
+  good node features (FINDING 26)
+  repaired topology
+  four read-outs
+  a jointly trained encoder with a re-selected support
+
+The cause lies after the encoder, in the classifier.
+
+Caveat on "the encoder learned": under Adam, weight decay moves parameters
+even when their loss gradient is near zero. The GCN's gains drifted toward
+zero (final range 0.00-0.61). Describe the run as "the encoder was trained
+and the support re-selected", not as "the encoder learned features".
+
+
+FOR THE MANUSCRIPT
+------------------
+- Closes the "the encoder was never trained" objection. One clause in the
+  graph-failure paragraph (COMMENT-LOG C19.1).
+- Optionally one row in Table 2 (COMMENT-LOG C14.6).
+
+
+REPRODUCE
+---------
+  cd github && PYTHONPATH=src ../.venv/bin/python scripts/run_graph_trained_encoder.py
+  (about 4 h serial; --shard i/n splits folds across processes)
