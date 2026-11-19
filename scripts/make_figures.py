@@ -32,6 +32,7 @@ ACCENT = "#c05621"
 plt.rcParams.update({
     "font.size": 9, "axes.grid": True, "grid.alpha": 0.25,
     "axes.spines.top": False, "axes.spines.right": False, "figure.dpi": 150,
+    "pdf.fonttype": 42,  # embed TrueType, not Type 3, as journal PDF checks require
 })
 
 
@@ -923,7 +924,9 @@ def fig_degeneracy(out_dir: Path, paper_dir: Path | None,
     worst = None
     for _run, models in runs.items():
         for name, m in models.items():
-            q = name.startswith(("Q", "TQEK"))
+            # Name the quantum models outright: a prefix test such as "Q"
+            # misses VQC and draws it as classical.
+            q = name in {"QCNN", "VQC", "QSVM-fixed", "QSVM-Pegasos", "TQEK"}
             deg = min(m["sensitivity"], m["specificity"]) < 0.30 or abs(m["mcc"]) < 0.02
             ax.scatter(m["accuracy"], m["mcc"], s=26 if deg else 16,
                        c=(ACCENT if q else "#8c8c8c"),

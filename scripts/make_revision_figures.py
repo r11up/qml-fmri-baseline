@@ -52,8 +52,9 @@ def fig_c8_effdim(out: Path) -> None:
         ax.set_xscale("log")
         ax.set_xlabel("effective dimension")
         ax.set_ylabel(ylabel)
-        ax.set_title(label, loc="left", fontsize=7.2, pad=2)
+        ax.set_title(label, loc="left", fontsize=7.5, fontweight="bold", pad=2)
     axes[0].axhline(0.5, color="grey", ls=":", lw=0.7)
+    axes[1].set_ylim(bottom=0)
     handles = [Line2D([], [], color=c, lw=1.4, label=n) for n, c in COHORT_COLOURS.items()]
     handles += [Line2D([], [], color="#333", ls="-", marker="o", ms=2.2, label="quantum fidelity"),
                 Line2D([], [], color="#333", ls="--", marker="s", ms=2.2, label="classical RBF")]
