@@ -1,0 +1,85 @@
+ucla: (226, 17955)
+  fold1        done (6 s)
+  fold2        done (13 s)
+  fold3        done (18 s)
+  fold4        done (24 s)
+  fold5        done (29 s)
+  fold6        done (34 s)
+  fold7        done (41 s)
+  fold8        done (48 s)
+  fold9        done (53 s)
+  fold10       done (58 s)
+
+  quantum  n=4   width=0.02   effdim=     1.1  conc=8.41e-04  train=0.653 test=0.523 auc=0.548 gap=+0.130
+  quantum  n=4   width=0.05   effdim=     1.3  conc=7.98e-03  train=0.692 test=0.561 auc=0.566 gap=+0.131
+  quantum  n=4   width=0.1    effdim=     2.8  conc=7.40e-02  train=0.708 test=0.553 auc=0.568 gap=+0.155
+  quantum  n=4   width=0.15   effdim=     5.1  conc=7.08e-02  train=0.725 test=0.563 auc=0.579 gap=+0.163
+  quantum  n=4   width=0.2    effdim=     8.7  conc=5.36e-02  train=0.745 test=0.575 auc=0.575 gap=+0.170
+  quantum  n=4   width=0.3    effdim=    10.1  conc=5.10e-02  train=0.754 test=0.550 auc=0.570 gap=+0.204
+  quantum  n=4   width=0.5    effdim=    31.5  conc=1.69e-02  train=0.812 test=0.589 auc=0.585 gap=+0.223
+  quantum  n=4   width=1.0    effdim=    48.0  conc=9.60e-03  train=0.838 test=0.540 auc=0.541 gap=+0.298
+  quantum  n=4   width=2.0    effdim=    42.6  conc=1.02e-02  train=0.839 test=0.545 auc=0.532 gap=+0.294
+  quantum  n=8   width=0.02   effdim=     1.1  conc=2.76e-03  train=0.710 test=0.536 auc=0.568 gap=+0.174
+  quantum  n=8   width=0.05   effdim=     1.7  conc=1.64e-02  train=0.740 test=0.558 auc=0.586 gap=+0.182
+  quantum  n=8   width=0.1    effdim=     9.4  conc=4.55e-02  train=0.791 test=0.576 auc=0.584 gap=+0.215
+  quantum  n=8   width=0.15   effdim=    24.7  conc=2.41e-02  train=0.847 test=0.558 auc=0.580 gap=+0.289
+  quantum  n=8   width=0.2    effdim=    56.5  conc=1.01e-02  train=0.898 test=0.571 auc=0.593 gap=+0.328
+  quantum  n=8   width=0.3    effdim=    92.0  conc=5.37e-03  train=0.932 test=0.558 auc=0.560 gap=+0.374
+  quantum  n=8   width=0.5    effdim=   177.3  conc=6.30e-04  train=0.998 test=0.624 auc=0.631 gap=+0.374
+  quantum  n=8   width=1.0    effdim=   195.0  conc=1.77e-04  train=1.000 test=0.518 auc=0.495 gap=+0.482
+  quantum  n=8   width=2.0    effdim=   193.5  conc=1.99e-04  train=1.000 test=0.544 auc=0.527 gap=+0.456
+  quantum  n=12  width=0.02   effdim=     1.2  conc=4.53e-03  train=0.736 test=0.535 auc=0.557 gap=+0.201
+  quantum  n=12  width=0.05   effdim=     2.2  conc=2.11e-02  train=0.770 test=0.536 auc=0.562 gap=+0.234
+  quantum  n=12  width=0.1    effdim=    24.9  conc=2.11e-02  train=0.869 test=0.572 auc=0.575 gap=+0.297
+  quantum  n=12  width=0.15   effdim=    77.1  conc=6.62e-03  train=0.932 test=0.559 auc=0.558 gap=+0.373
+  quantum  n=12  width=0.2    effdim=   143.5  conc=1.84e-03  train=0.979 test=0.523 auc=0.566 gap=+0.456
+  quantum  n=12  width=0.3    effdim=   185.4  conc=4.57e-04  train=0.997 test=0.514 auc=0.571 gap=+0.483
+  quantum  n=12  width=0.5    effdim=   202.3  conc=2.62e-05  train=1.000 test=0.558 auc=0.547 gap=+0.442
+  quantum  n=12  width=1.0    effdim=   203.3  conc=2.86e-06  train=1.000 test=0.544 auc=0.502 gap=+0.456
+  quantum  n=12  width=2.0    effdim=   203.2  conc=3.84e-06  train=1.000 test=0.553 auc=0.541 gap=+0.447
+  rbf      n=4   width=0.002  effdim=     1.0  conc=1.58e-04  train=0.698 test=0.523 auc=0.537 gap=+0.175
+  rbf      n=4   width=0.005  effdim=     1.1  conc=9.12e-04  train=0.704 test=0.522 auc=0.541 gap=+0.182
+  rbf      n=4   width=0.01   effdim=     1.2  conc=3.20e-03  train=0.708 test=0.553 auc=0.538 gap=+0.155
+  rbf      n=4   width=0.03   effdim=     1.5  conc=1.79e-02  train=0.715 test=0.535 auc=0.540 gap=+0.180
+  rbf      n=4   width=0.06   effdim=     2.1  conc=3.90e-02  train=0.721 test=0.535 auc=0.542 gap=+0.186
+  rbf      n=4   width=0.125  effdim=     3.7  conc=5.95e-02  train=0.730 test=0.540 auc=0.557 gap=+0.190
+  rbf      n=4   width=0.25   effdim=     7.6  conc=5.62e-02  train=0.755 test=0.566 auc=0.552 gap=+0.188
+  rbf      n=4   width=0.5    effdim=    18.2  conc=3.43e-02  train=0.792 test=0.553 auc=0.538 gap=+0.239
+  rbf      n=4   width=1.0    effdim=    46.0  conc=1.47e-02  train=0.838 test=0.575 auc=0.543 gap=+0.262
+  rbf      n=4   width=2.0    effdim=    99.8  conc=5.02e-03  train=0.909 test=0.540 auc=0.541 gap=+0.369
+  rbf      n=8   width=0.002  effdim=     1.1  conc=3.97e-04  train=0.735 test=0.491 auc=0.552 gap=+0.245
+  rbf      n=8   width=0.005  effdim=     1.2  conc=2.16e-03  train=0.749 test=0.548 auc=0.572 gap=+0.201
+  rbf      n=8   width=0.01   effdim=     1.3  conc=6.91e-03  train=0.747 test=0.553 auc=0.577 gap=+0.194
+  rbf      n=8   width=0.03   effdim=     2.2  conc=2.80e-02  train=0.766 test=0.548 auc=0.587 gap=+0.218
+  rbf      n=8   width=0.06   effdim=     4.1  conc=4.15e-02  train=0.781 test=0.535 auc=0.568 gap=+0.246
+  rbf      n=8   width=0.125  effdim=    11.1  conc=3.46e-02  train=0.827 test=0.540 auc=0.569 gap=+0.287
+  rbf      n=8   width=0.25   effdim=    36.8  conc=1.51e-02  train=0.887 test=0.531 auc=0.567 gap=+0.356
+  rbf      n=8   width=0.5    effdim=   111.2  conc=3.62e-03  train=0.951 test=0.536 auc=0.570 gap=+0.415
+  rbf      n=8   width=1.0    effdim=   183.0  conc=5.36e-04  train=0.996 test=0.509 auc=0.552 gap=+0.487
+  rbf      n=8   width=2.0    effdim=   201.1  conc=5.56e-05  train=1.000 test=0.579 auc=0.542 gap=+0.421
+  rbf      n=12  width=0.002  effdim=     1.1  conc=7.12e-04  train=0.757 test=0.505 auc=0.540 gap=+0.252
+  rbf      n=12  width=0.005  effdim=     1.3  conc=3.64e-03  train=0.770 test=0.514 auc=0.540 gap=+0.256
+  rbf      n=12  width=0.01   effdim=     1.6  conc=1.06e-02  train=0.772 test=0.541 auc=0.544 gap=+0.232
+  rbf      n=12  width=0.03   effdim=     3.2  conc=3.15e-02  train=0.799 test=0.531 auc=0.546 gap=+0.268
+  rbf      n=12  width=0.06   effdim=     7.7  conc=3.32e-02  train=0.835 test=0.518 auc=0.540 gap=+0.317
+  rbf      n=12  width=0.125  effdim=    28.5  conc=1.65e-02  train=0.893 test=0.527 auc=0.532 gap=+0.366
+  rbf      n=12  width=0.25   effdim=   104.4  conc=3.80e-03  train=0.964 test=0.505 auc=0.529 gap=+0.459
+  rbf      n=12  width=0.5    effdim=   186.6  conc=4.23e-04  train=0.998 test=0.502 auc=0.516 gap=+0.496
+  rbf      n=12  width=1.0    effdim=   202.3  conc=2.67e-05  train=1.000 test=0.522 auc=0.496 gap=+0.478
+  rbf      n=12  width=2.0    effdim=   203.4  conc=1.01e-06  train=1.000 test=0.544 auc=0.479 gap=+0.456
+
+  quantum: eff.dim vs test_accuracy            rho=-0.04  p=0.837
+  quantum: eff.dim vs test_auc                 rho=-0.35  p=0.071
+  quantum: eff.dim vs gap                      rho=+0.92  p=7.18e-12
+  quantum: eff.dim vs train_accuracy           rho=+0.97  p=3.72e-16
+  rbf: eff.dim vs test_accuracy                rho=+0.09  p=0.627
+  rbf: eff.dim vs test_auc                     rho=-0.22  p=0.242
+  rbf: eff.dim vs gap                          rho=+0.83  p=1e-08
+  rbf: eff.dim vs train_accuracy               rho=+0.92  p=3.36e-13
+  quantum: concentration vs test_auc           rho=+0.58  p=0.00168
+  quantum: expressibility vs test_auc          rho=+0.39  p=0.0432
+  quantum: concentration vs test_accuracy      rho=+0.44  p=0.0228
+  quantum: expressibility vs test_accuracy     rho=+0.01  p=0.954
+  one curve (quantum minus RBF at equal effective dimension): {'test_auc': {'mean_delta': -0.0002798831276500935, 'mean_abs_delta': 0.018025564052836895, 'max_abs_delta': 0.07842086831432671, 'settings_in_range': 23}, 'test_accuracy': {'mean_delta': 0.017372793234770045, 'mean_abs_delta': 0.0239700196774616, 'max_abs_delta': 0.11310493350826767, 'settings_in_range': 23}, 'gap': {'mean_delta': -0.044605629357317135, 'mean_abs_delta': 0.05129154693024057, 'max_abs_delta': 0.12347910514118648, 'settings_in_range': 23}}
+
+saved: results/revision/kgen_ucla/kernel_generalization.json

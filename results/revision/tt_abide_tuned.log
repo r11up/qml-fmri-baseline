@@ -1,0 +1,48 @@
+tensor-train quantum models -> results/revision/tt_abide_tuned
+1035 subjects | 505 ASD / 530 control | 20 sites
+nodes=200  features=8  T range=78-316  mean explained variance=91.1%
+connectivity: (1035, 19900)
+
+trainable parameters: TTN-VQC=530  TT-MLP=530  TensorHyper-VQC=594  TT-HyperMLP=594
+  CALTECH      n=37   TTN-VQC=0.541  TT-MLP=0.622  TensorHyper-VQC=0.541  TT-HyperMLP=0.649  SVM-linear=0.676  SVM-RBF=0.622
+  CMU          n=27   TTN-VQC=0.407  TT-MLP=0.630  TensorHyper-VQC=0.630  TT-HyperMLP=0.815  SVM-linear=0.667  SVM-RBF=0.704
+  KKI          n=48   TTN-VQC=0.479  TT-MLP=0.500  TensorHyper-VQC=0.562  TT-HyperMLP=0.542  SVM-linear=0.521  SVM-RBF=0.521
+  LEUVEN_1     n=29   TTN-VQC=0.586  TT-MLP=0.586  TensorHyper-VQC=0.690  TT-HyperMLP=0.517  SVM-linear=0.552  SVM-RBF=0.586
+  LEUVEN_2     n=34   TTN-VQC=0.618  TT-MLP=0.676  TensorHyper-VQC=0.647  TT-HyperMLP=0.618  SVM-linear=0.647  SVM-RBF=0.647
+  MAX_MUN      n=52   TTN-VQC=0.423  TT-MLP=0.615  TensorHyper-VQC=0.596  TT-HyperMLP=0.596  SVM-linear=0.538  SVM-RBF=0.500
+  NYU          n=175  TTN-VQC=0.594  TT-MLP=0.617  TensorHyper-VQC=0.691  TT-HyperMLP=0.651  SVM-linear=0.640  SVM-RBF=0.714
+  OHSU         n=26   TTN-VQC=0.500  TT-MLP=0.577  TensorHyper-VQC=0.423  TT-HyperMLP=0.462  SVM-linear=0.615  SVM-RBF=0.538
+  OLIN         n=34   TTN-VQC=0.588  TT-MLP=0.706  TensorHyper-VQC=0.647  TT-HyperMLP=0.588  SVM-linear=0.500  SVM-RBF=0.647
+  PITT         n=56   TTN-VQC=0.589  TT-MLP=0.589  TensorHyper-VQC=0.607  TT-HyperMLP=0.643  SVM-linear=0.571  SVM-RBF=0.714
+  SBL          n=30   TTN-VQC=0.567  TT-MLP=0.533  TensorHyper-VQC=0.533  TT-HyperMLP=0.600  SVM-linear=0.567  SVM-RBF=0.567
+  SDSU         n=36   TTN-VQC=0.528  TT-MLP=0.667  TensorHyper-VQC=0.639  TT-HyperMLP=0.639  SVM-linear=0.667  SVM-RBF=0.667
+  STANFORD     n=39   TTN-VQC=0.513  TT-MLP=0.538  TensorHyper-VQC=0.513  TT-HyperMLP=0.436  SVM-linear=0.718  SVM-RBF=0.615
+  TRINITY      n=47   TTN-VQC=0.447  TT-MLP=0.660  TensorHyper-VQC=0.553  TT-HyperMLP=0.681  SVM-linear=0.553  SVM-RBF=0.660
+  UCLA_1       n=72   TTN-VQC=0.569  TT-MLP=0.611  TensorHyper-VQC=0.667  TT-HyperMLP=0.611  SVM-linear=0.625  SVM-RBF=0.667
+  UCLA_2       n=26   TTN-VQC=0.615  TT-MLP=0.769  TensorHyper-VQC=0.731  TT-HyperMLP=0.654  SVM-linear=0.808  SVM-RBF=0.692
+  UM_1         n=106  TTN-VQC=0.472  TT-MLP=0.623  TensorHyper-VQC=0.604  TT-HyperMLP=0.651  SVM-linear=0.613  SVM-RBF=0.651
+  UM_2         n=34   TTN-VQC=0.529  TT-MLP=0.676  TensorHyper-VQC=0.529  TT-HyperMLP=0.588  SVM-linear=0.706  SVM-RBF=0.765
+  USM          n=71   TTN-VQC=0.493  TT-MLP=0.746  TensorHyper-VQC=0.761  TT-HyperMLP=0.662  SVM-linear=0.620  SVM-RBF=0.761
+  YALE         n=56   TTN-VQC=0.536  TT-MLP=0.607  TensorHyper-VQC=0.661  TT-HyperMLP=0.625  SVM-linear=0.732  SVM-RBF=0.732
+
+============================================================================================
+TENSOR-TRAIN QUANTUM MODELS - 2000 features, 8 qubits, depth 6
+============================================================================================
+model                  train       accuracy             F1            AUC  sec/fold
+TTN-VQC                0.840    0.530+-0.027    0.488+-0.041    0.537+-0.027      96.0
+TT-MLP                 0.830    0.627+-0.030    0.609+-0.039    0.671+-0.041       1.8
+TensorHyper-VQC        0.783    0.611+-0.036    0.573+-0.061    0.669+-0.046      95.9
+TT-HyperMLP            0.792    0.611+-0.036    0.589+-0.056    0.663+-0.035       6.0
+SVM-linear (2,000)     1.000    0.627+-0.035    0.618+-0.039    0.688+-0.030       0.3
+SVM-RBF (2,000)        0.956    0.648+-0.033    0.632+-0.051    0.739+-0.036       0.8
+
+TTN-VQC vs TT-MLP [accuracy]: median diff -0.079, wins 1/20, p = 0.0004
+TTN-VQC vs TT-MLP [f1]: median diff -0.122, wins 2/20, p = 0.0005
+TTN-VQC vs TT-MLP [auc]: median diff -0.148, wins 3/20, p = 0.0002
+TTN-VQC vs TT-MLP [specificity]: median diff -0.080, wins 6/20, p = 0.1569
+TensorHyper-VQC vs TT-HyperMLP [accuracy]: median diff +0.010, wins 10/20, p = 1.0000
+TensorHyper-VQC vs TT-HyperMLP [f1]: median diff +0.019, wins 11/20, p = 0.9039
+TensorHyper-VQC vs TT-HyperMLP [auc]: median diff -0.001, wins 10/20, p = 0.9273
+TensorHyper-VQC vs TT-HyperMLP [specificity]: median diff +0.057, wins 11/20, p = 0.1477
+
+saved: results/revision/tt_abide_tuned/tensor_vqc_results.json

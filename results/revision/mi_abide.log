@@ -1,0 +1,48 @@
+quantum model suite -> results/revision/mi_abide
+1035 subjects | 505 ASD / 530 control | 20 sites
+nodes=200  features=8  T range=78-316  mean explained variance=91.1%
+connectivity (mutual_information): (1035, 19900)
+
+  CALTECH      n=37   QCNN=0.568  VQC=0.649  QSVM-=0.595  QSVM-=0.568  TQEK=0.622  CNN=0.595  MLP=0.622  SVM-R=0.676  Train=0.568
+  CMU          n=27   QCNN=0.593  VQC=0.556  QSVM-=0.593  QSVM-=0.630  TQEK=0.519  CNN=0.667  MLP=0.519  SVM-R=0.630  Train=0.481
+  KKI          n=48   QCNN=0.646  VQC=0.521  QSVM-=0.667  QSVM-=0.688  TQEK=0.625  CNN=0.625  MLP=0.604  SVM-R=0.688  Train=0.667
+  LEUVEN_1     n=29   QCNN=0.586  VQC=0.586  QSVM-=0.552  QSVM-=0.621  TQEK=0.586  CNN=0.621  MLP=0.586  SVM-R=0.621  Train=0.586
+  LEUVEN_2     n=34   QCNN=0.559  VQC=0.676  QSVM-=0.588  QSVM-=0.588  TQEK=0.559  CNN=0.588  MLP=0.559  SVM-R=0.500  Train=0.529
+  MAX_MUN      n=52   QCNN=0.577  VQC=0.538  QSVM-=0.615  QSVM-=0.635  TQEK=0.635  CNN=0.538  MLP=0.654  SVM-R=0.615  Train=0.577
+  NYU          n=175  QCNN=0.600  VQC=0.571  QSVM-=0.589  QSVM-=0.583  TQEK=0.606  CNN=0.594  MLP=0.606  SVM-R=0.623  Train=0.646
+  OHSU         n=26   QCNN=0.577  VQC=0.538  QSVM-=0.500  QSVM-=0.577  TQEK=0.462  CNN=0.577  MLP=0.615  SVM-R=0.538  Train=0.538
+  OLIN         n=34   QCNN=0.618  VQC=0.441  QSVM-=0.529  QSVM-=0.588  TQEK=0.588  CNN=0.529  MLP=0.529  SVM-R=0.559  Train=0.588
+  PITT         n=56   QCNN=0.625  VQC=0.607  QSVM-=0.482  QSVM-=0.482  TQEK=0.625  CNN=0.518  MLP=0.607  SVM-R=0.607  Train=0.518
+  SBL          n=30   QCNN=0.533  VQC=0.600  QSVM-=0.533  QSVM-=0.533  TQEK=0.600  CNN=0.467  MLP=0.600  SVM-R=0.567  Train=0.400
+  SDSU         n=36   QCNN=0.583  VQC=0.556  QSVM-=0.667  QSVM-=0.639  TQEK=0.583  CNN=0.556  MLP=0.611  SVM-R=0.639  Train=0.556
+  STANFORD     n=39   QCNN=0.436  VQC=0.359  QSVM-=0.410  QSVM-=0.462  TQEK=0.436  CNN=0.487  MLP=0.436  SVM-R=0.436  Train=0.462
+  TRINITY      n=47   QCNN=0.723  VQC=0.638  QSVM-=0.660  QSVM-=0.596  TQEK=0.681  CNN=0.574  MLP=0.617  SVM-R=0.723  Train=0.681
+  UCLA_1       n=72   QCNN=0.611  VQC=0.458  QSVM-=0.583  QSVM-=0.597  TQEK=0.625  CNN=0.597  MLP=0.486  SVM-R=0.583  Train=0.514
+  UCLA_2       n=26   QCNN=0.615  VQC=0.538  QSVM-=0.692  QSVM-=0.654  TQEK=0.654  CNN=0.462  MLP=0.577  SVM-R=0.692  Train=0.615
+  UM_1         n=106  QCNN=0.613  VQC=0.538  QSVM-=0.566  QSVM-=0.623  TQEK=0.632  CNN=0.557  MLP=0.594  SVM-R=0.623  Train=0.651
+  UM_2         n=34   QCNN=0.559  VQC=0.500  QSVM-=0.588  QSVM-=0.559  TQEK=0.618  CNN=0.382  MLP=0.529  SVM-R=0.529  Train=0.559
+  USM          n=71   QCNN=0.690  VQC=0.592  QSVM-=0.493  QSVM-=0.563  TQEK=0.718  CNN=0.592  MLP=0.704  SVM-R=0.746  Train=0.648
+  YALE         n=56   QCNN=0.607  VQC=0.500  QSVM-=0.607  QSVM-=0.571  TQEK=0.661  CNN=0.554  MLP=0.589  SVM-R=0.625  Train=0.589
+
+==============================================================================
+QUANTUM MODEL SUITE — 8 qubits / 8 matched features
+==============================================================================
+model                  accuracy             F1            AUC  sec/fold
+-----------------------------------------------------------------------
+QCNN                0.596+-0.025    0.551+-0.052    0.624+-0.042      31.2
+VQC                 0.548+-0.033    0.545+-0.044    0.588+-0.039      13.6
+QSVM-Pegasos        0.575+-0.031    0.534+-0.061      nan+-nan         0.0
+QSVM-fixed          0.588+-0.024    0.535+-0.044    0.619+-0.032       0.4
+TQEK                0.602+-0.030    0.533+-0.062    0.652+-0.041       4.0
+CNN (1-D)           0.554+-0.029    0.511+-0.044    0.603+-0.031       8.2
+MLP                 0.582+-0.026    0.549+-0.039    0.614+-0.032       0.1
+SVM-RBF             0.611+-0.033    0.570+-0.056    0.644+-0.036       0.0
+Trainable-RBF       0.569+-0.032    0.493+-0.055    0.573+-0.042       0.1
+
+QCNN vs CNN (1-D): median dAcc = +0.033, wins 14/20, p = 0.0242
+VQC vs MLP: median dAcc = -0.036, wins 4/20, p = 0.0168
+TQEK vs Trainable-RBF: median dAcc = +0.033, wins 12/20, p = 0.0352
+QSVM-fixed vs SVM-RBF: median dAcc = +0.000, wins 7/20, p = 0.1321
+QSVM-Pegasos vs SVM-RBF: median dAcc = -0.031, wins 3/20, p = 0.0277
+
+saved: results/revision/mi_abide/quantum_models_results.json

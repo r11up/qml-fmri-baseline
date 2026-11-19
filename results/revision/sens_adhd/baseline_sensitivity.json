@@ -1,0 +1,1361 @@
+{
+  "config": {
+    "data_root": "data/ADHD-200",
+    "tag": "adhd",
+    "cv": "leave-site-out",
+    "folds": 10,
+    "min_test_size": 10,
+    "seed": 0,
+    "only": [
+      "CNN (1-D)",
+      "Trainable-RBF",
+      "C-CNN",
+      "C-MLP"
+    ],
+    "rerun_dir": "results/rerun22",
+    "out": "results/revision/sens_adhd"
+  },
+  "grids": {
+    "CNN (1-D)": [
+      {
+        "lr": 0.05,
+        "channels": 8,
+        "epochs": 150
+      },
+      {
+        "lr": 0.05,
+        "channels": 8,
+        "epochs": 400
+      },
+      {
+        "lr": 0.05,
+        "channels": 16,
+        "epochs": 150
+      },
+      {
+        "lr": 0.05,
+        "channels": 16,
+        "epochs": 400
+      },
+      {
+        "lr": 0.01,
+        "channels": 8,
+        "epochs": 150
+      },
+      {
+        "lr": 0.01,
+        "channels": 8,
+        "epochs": 400
+      },
+      {
+        "lr": 0.01,
+        "channels": 16,
+        "epochs": 150
+      },
+      {
+        "lr": 0.01,
+        "channels": 16,
+        "epochs": 400
+      },
+      {
+        "lr": 0.002,
+        "channels": 8,
+        "epochs": 150
+      },
+      {
+        "lr": 0.002,
+        "channels": 8,
+        "epochs": 400
+      },
+      {
+        "lr": 0.002,
+        "channels": 16,
+        "epochs": 150
+      },
+      {
+        "lr": 0.002,
+        "channels": 16,
+        "epochs": 400
+      }
+    ],
+    "Trainable-RBF": [
+      {
+        "steps": 60,
+        "lr": 0.05,
+        "C": 1.0
+      },
+      {
+        "steps": 60,
+        "lr": 0.05,
+        "C": 0.1
+      },
+      {
+        "steps": 60,
+        "lr": 0.05,
+        "C": 10.0
+      },
+      {
+        "steps": 60,
+        "lr": 0.01,
+        "C": 1.0
+      },
+      {
+        "steps": 60,
+        "lr": 0.01,
+        "C": 0.1
+      },
+      {
+        "steps": 60,
+        "lr": 0.01,
+        "C": 10.0
+      },
+      {
+        "steps": 200,
+        "lr": 0.05,
+        "C": 1.0
+      },
+      {
+        "steps": 200,
+        "lr": 0.05,
+        "C": 0.1
+      },
+      {
+        "steps": 200,
+        "lr": 0.05,
+        "C": 10.0
+      },
+      {
+        "steps": 200,
+        "lr": 0.01,
+        "C": 1.0
+      },
+      {
+        "steps": 200,
+        "lr": 0.01,
+        "C": 0.1
+      },
+      {
+        "steps": 200,
+        "lr": 0.01,
+        "C": 10.0
+      }
+    ],
+    "C-CNN": [
+      {
+        "lr": 0.02,
+        "channels": 8,
+        "epochs": 40
+      },
+      {
+        "lr": 0.02,
+        "channels": 8,
+        "epochs": 120
+      },
+      {
+        "lr": 0.02,
+        "channels": 16,
+        "epochs": 40
+      },
+      {
+        "lr": 0.02,
+        "channels": 16,
+        "epochs": 120
+      },
+      {
+        "lr": 0.005,
+        "channels": 8,
+        "epochs": 40
+      },
+      {
+        "lr": 0.005,
+        "channels": 8,
+        "epochs": 120
+      },
+      {
+        "lr": 0.005,
+        "channels": 16,
+        "epochs": 40
+      },
+      {
+        "lr": 0.005,
+        "channels": 16,
+        "epochs": 120
+      },
+      {
+        "lr": 0.001,
+        "channels": 8,
+        "epochs": 40
+      },
+      {
+        "lr": 0.001,
+        "channels": 8,
+        "epochs": 120
+      },
+      {
+        "lr": 0.001,
+        "channels": 16,
+        "epochs": 40
+      },
+      {
+        "lr": 0.001,
+        "channels": 16,
+        "epochs": 120
+      }
+    ],
+    "C-MLP": [
+      {
+        "lr": 0.02,
+        "width": 32,
+        "epochs": 40
+      },
+      {
+        "lr": 0.02,
+        "width": 32,
+        "epochs": 120
+      },
+      {
+        "lr": 0.02,
+        "width": 64,
+        "epochs": 40
+      },
+      {
+        "lr": 0.02,
+        "width": 64,
+        "epochs": 120
+      },
+      {
+        "lr": 0.005,
+        "width": 32,
+        "epochs": 40
+      },
+      {
+        "lr": 0.005,
+        "width": 32,
+        "epochs": 120
+      },
+      {
+        "lr": 0.005,
+        "width": 64,
+        "epochs": 40
+      },
+      {
+        "lr": 0.005,
+        "width": 64,
+        "epochs": 120
+      },
+      {
+        "lr": 0.001,
+        "width": 32,
+        "epochs": 40
+      },
+      {
+        "lr": 0.001,
+        "width": 32,
+        "epochs": 120
+      },
+      {
+        "lr": 0.001,
+        "width": 64,
+        "epochs": 40
+      },
+      {
+        "lr": 0.001,
+        "width": 64,
+        "epochs": 120
+      }
+    ]
+  },
+  "seconds": {
+    "CNN (1-D)": 319.16747958405176,
+    "Trainable-RBF": 11.403928667015862,
+    "C-CNN": 111.90117883397033,
+    "C-MLP": 8.115586665924639
+  },
+  "tuned_per_fold": {
+    "CNN (1-D)": [
+      {
+        "site": "KKI",
+        "n": 83,
+        "train_accuracy": 0.6403508771929824,
+        "f1": 0.36065573770491804,
+        "accuracy": 0.5301204819277109,
+        "specificity": 0.5409836065573771,
+        "sensitivity": 0.5,
+        "tn": 33,
+        "fp": 28,
+        "fn": 11,
+        "tp": 11,
+        "auc": 0.5409836065573771
+      },
+      {
+        "site": "NYU",
+        "n": 216,
+        "train_accuracy": 0.6606170598911071,
+        "f1": 0.34831460674157305,
+        "accuracy": 0.46296296296296297,
+        "specificity": 0.7040816326530612,
+        "sensitivity": 0.2627118644067797,
+        "tn": 69,
+        "fp": 29,
+        "fn": 87,
+        "tp": 31,
+        "auc": 0.5084745762711864
+      },
+      {
+        "site": "NeuroIMAGE",
+        "n": 48,
+        "train_accuracy": 0.694019471488178,
+        "f1": 0.18181818181818182,
+        "accuracy": 0.4375,
+        "specificity": 0.782608695652174,
+        "sensitivity": 0.12,
+        "tn": 18,
+        "fp": 5,
+        "fn": 22,
+        "tp": 3,
+        "auc": 0.4034782608695653
+      },
+      {
+        "site": "OHSU",
+        "n": 78,
+        "train_accuracy": 0.7532656023222061,
+        "f1": 0.5454545454545454,
+        "accuracy": 0.5512820512820513,
+        "specificity": 0.5365853658536586,
+        "sensitivity": 0.5675675675675675,
+        "tn": 22,
+        "fp": 19,
+        "fn": 16,
+        "tp": 21,
+        "auc": 0.6242584047462096
+      },
+      {
+        "site": "Peking_1",
+        "n": 85,
+        "train_accuracy": 0.6348973607038123,
+        "f1": 0.3611111111111111,
+        "accuracy": 0.4588235294117647,
+        "specificity": 0.4262295081967213,
+        "sensitivity": 0.5416666666666666,
+        "tn": 26,
+        "fp": 35,
+        "fn": 11,
+        "tp": 13,
+        "auc": 0.5204918032786885
+      },
+      {
+        "site": "Peking_2",
+        "n": 67,
+        "train_accuracy": 0.7485714285714286,
+        "f1": 0.39285714285714285,
+        "accuracy": 0.4925373134328358,
+        "specificity": 0.6875,
+        "sensitivity": 0.3142857142857143,
+        "tn": 22,
+        "fp": 10,
+        "fn": 24,
+        "tp": 11,
+        "auc": 0.5464285714285714
+      },
+      {
+        "site": "Peking_3",
+        "n": 42,
+        "train_accuracy": 0.6924137931034483,
+        "f1": 0.55,
+        "accuracy": 0.5714285714285714,
+        "specificity": 0.5652173913043478,
+        "sensitivity": 0.5789473684210527,
+        "tn": 13,
+        "fp": 10,
+        "fn": 8,
+        "tp": 11,
+        "auc": 0.585812356979405
+      }
+    ],
+    "Trainable-RBF": [
+      {
+        "site": "KKI",
+        "n": 83,
+        "train_accuracy": 0.6783625730994152,
+        "f1": 0.36065573770491804,
+        "accuracy": 0.5301204819277109,
+        "specificity": 0.5409836065573771,
+        "sensitivity": 0.5,
+        "tn": 33,
+        "fp": 28,
+        "fn": 11,
+        "tp": 11,
+        "auc": 0.5350223546944858
+      },
+      {
+        "site": "NYU",
+        "n": 216,
+        "train_accuracy": 0.6442831215970962,
+        "f1": 0.49214659685863876,
+        "accuracy": 0.5509259259259259,
+        "specificity": 0.7346938775510204,
+        "sensitivity": 0.3983050847457627,
+        "tn": 72,
+        "fp": 26,
+        "fn": 71,
+        "tp": 47,
+        "auc": 0.5686613628502248
+      },
+      {
+        "site": "NeuroIMAGE",
+        "n": 48,
+        "train_accuracy": 0.6759388038942976,
+        "f1": 0.0625,
+        "accuracy": 0.375,
+        "specificity": 0.7391304347826086,
+        "sensitivity": 0.04,
+        "tn": 17,
+        "fp": 6,
+        "fn": 24,
+        "tp": 1,
+        "auc": 0.4973913043478261
+      },
+      {
+        "site": "OHSU",
+        "n": 78,
+        "train_accuracy": 0.8447024673439768,
+        "f1": 0.5454545454545454,
+        "accuracy": 0.6153846153846154,
+        "specificity": 0.7317073170731707,
+        "sensitivity": 0.4864864864864865,
+        "tn": 30,
+        "fp": 11,
+        "fn": 19,
+        "tp": 18,
+        "auc": 0.6611733684904416
+      },
+      {
+        "site": "Peking_1",
+        "n": 85,
+        "train_accuracy": 0.6906158357771262,
+        "f1": 0.39215686274509803,
+        "accuracy": 0.6352941176470588,
+        "specificity": 0.7213114754098361,
+        "sensitivity": 0.4166666666666667,
+        "tn": 44,
+        "fp": 17,
+        "fn": 14,
+        "tp": 10,
+        "auc": 0.5683060109289617
+      },
+      {
+        "site": "Peking_2",
+        "n": 67,
+        "train_accuracy": 0.6528571428571428,
+        "f1": 0.43137254901960786,
+        "accuracy": 0.5671641791044776,
+        "specificity": 0.84375,
+        "sensitivity": 0.3142857142857143,
+        "tn": 27,
+        "fp": 5,
+        "fn": 24,
+        "tp": 11,
+        "auc": 0.5276785714285714
+      },
+      {
+        "site": "Peking_3",
+        "n": 42,
+        "train_accuracy": 0.8275862068965517,
+        "f1": 0.6,
+        "accuracy": 0.6190476190476191,
+        "specificity": 0.6086956521739131,
+        "sensitivity": 0.631578947368421,
+        "tn": 14,
+        "fp": 9,
+        "fn": 7,
+        "tp": 12,
+        "auc": 0.6109839816933638
+      }
+    ],
+    "C-CNN": [
+      {
+        "site": "KKI",
+        "n": 83,
+        "train_accuracy": 0.6666666666666666,
+        "f1": 0.2857142857142857,
+        "accuracy": 0.4578313253012048,
+        "specificity": 0.47540983606557374,
+        "sensitivity": 0.4090909090909091,
+        "tn": 29,
+        "fp": 32,
+        "fn": 13,
+        "tp": 9,
+        "auc": 0.4888226527570789
+      },
+      {
+        "site": "NYU",
+        "n": 216,
+        "train_accuracy": 0.6896551724137931,
+        "f1": 0.3825136612021858,
+        "accuracy": 0.47685185185185186,
+        "specificity": 0.6938775510204082,
+        "sensitivity": 0.2966101694915254,
+        "tn": 68,
+        "fp": 30,
+        "fn": 83,
+        "tp": 35,
+        "auc": 0.5238671739882392
+      },
+      {
+        "site": "NeuroIMAGE",
+        "n": 48,
+        "train_accuracy": 0.6828929068150209,
+        "f1": 0.06666666666666667,
+        "accuracy": 0.4166666666666667,
+        "specificity": 0.8260869565217391,
+        "sensitivity": 0.04,
+        "tn": 19,
+        "fp": 4,
+        "fn": 24,
+        "tp": 1,
+        "auc": 0.4208695652173914
+      },
+      {
+        "site": "OHSU",
+        "n": 78,
+        "train_accuracy": 0.7314949201741655,
+        "f1": 0.463768115942029,
+        "accuracy": 0.5256410256410257,
+        "specificity": 0.6097560975609756,
+        "sensitivity": 0.43243243243243246,
+        "tn": 25,
+        "fp": 16,
+        "fn": 21,
+        "tp": 16,
+        "auc": 0.5227422544495716
+      },
+      {
+        "site": "Peking_1",
+        "n": 85,
+        "train_accuracy": 0.6290322580645161,
+        "f1": 0.379746835443038,
+        "accuracy": 0.4235294117647059,
+        "specificity": 0.3442622950819672,
+        "sensitivity": 0.625,
+        "tn": 21,
+        "fp": 40,
+        "fn": 9,
+        "tp": 15,
+        "auc": 0.5225409836065573
+      },
+      {
+        "site": "Peking_2",
+        "n": 67,
+        "train_accuracy": 0.7257142857142858,
+        "f1": 0.37037037037037035,
+        "accuracy": 0.4925373134328358,
+        "specificity": 0.71875,
+        "sensitivity": 0.2857142857142857,
+        "tn": 23,
+        "fp": 9,
+        "fn": 25,
+        "tp": 10,
+        "auc": 0.5410714285714286
+      },
+      {
+        "site": "Peking_3",
+        "n": 42,
+        "train_accuracy": 0.663448275862069,
+        "f1": 0.6521739130434783,
+        "accuracy": 0.6190476190476191,
+        "specificity": 0.4782608695652174,
+        "sensitivity": 0.7894736842105263,
+        "tn": 11,
+        "fp": 12,
+        "fn": 4,
+        "tp": 15,
+        "auc": 0.6270022883295194
+      }
+    ],
+    "C-MLP": [
+      {
+        "site": "KKI",
+        "n": 83,
+        "train_accuracy": 0.7309941520467836,
+        "f1": 0.3050847457627119,
+        "accuracy": 0.5060240963855421,
+        "specificity": 0.5409836065573771,
+        "sensitivity": 0.4090909090909091,
+        "tn": 33,
+        "fp": 28,
+        "fn": 13,
+        "tp": 9,
+        "auc": 0.5037257824143071
+      },
+      {
+        "site": "NYU",
+        "n": 216,
+        "train_accuracy": 0.7749546279491834,
+        "f1": 0.5,
+        "accuracy": 0.5185185185185185,
+        "specificity": 0.6122448979591837,
+        "sensitivity": 0.4406779661016949,
+        "tn": 60,
+        "fp": 38,
+        "fn": 66,
+        "tp": 52,
+        "auc": 0.550933932895192
+      },
+      {
+        "site": "NeuroIMAGE",
+        "n": 48,
+        "train_accuracy": 0.7093184979137691,
+        "f1": 0.38095238095238093,
+        "accuracy": 0.4583333333333333,
+        "specificity": 0.6086956521739131,
+        "sensitivity": 0.32,
+        "tn": 14,
+        "fp": 9,
+        "fn": 17,
+        "tp": 8,
+        "auc": 0.4852173913043478
+      },
+      {
+        "site": "OHSU",
+        "n": 78,
+        "train_accuracy": 0.7547169811320755,
+        "f1": 0.5316455696202531,
+        "accuracy": 0.5256410256410257,
+        "specificity": 0.4878048780487805,
+        "sensitivity": 0.5675675675675675,
+        "tn": 20,
+        "fp": 21,
+        "fn": 16,
+        "tp": 21,
+        "auc": 0.5293342122610416
+      },
+      {
+        "site": "Peking_1",
+        "n": 85,
+        "train_accuracy": 0.7243401759530792,
+        "f1": 0.38596491228070173,
+        "accuracy": 0.5882352941176471,
+        "specificity": 0.639344262295082,
+        "sensitivity": 0.4583333333333333,
+        "tn": 39,
+        "fp": 22,
+        "fn": 13,
+        "tp": 11,
+        "auc": 0.601775956284153
+      },
+      {
+        "site": "Peking_2",
+        "n": 67,
+        "train_accuracy": 0.7257142857142858,
+        "f1": 0.46153846153846156,
+        "accuracy": 0.582089552238806,
+        "specificity": 0.84375,
+        "sensitivity": 0.34285714285714286,
+        "tn": 27,
+        "fp": 5,
+        "fn": 23,
+        "tp": 12,
+        "auc": 0.5696428571428571
+      },
+      {
+        "site": "Peking_3",
+        "n": 42,
+        "train_accuracy": 0.6924137931034483,
+        "f1": 0.4444444444444444,
+        "accuracy": 0.5238095238095238,
+        "specificity": 0.6086956521739131,
+        "sensitivity": 0.42105263157894735,
+        "tn": 14,
+        "fp": 9,
+        "fn": 11,
+        "tp": 8,
+        "auc": 0.6086956521739131
+      }
+    ]
+  },
+  "chosen": {
+    "CNN (1-D)": [
+      {
+        "site": "KKI",
+        "lr": 0.002,
+        "channels": 8,
+        "epochs": 150,
+        "inner_bacc": 0.6557692307692308
+      },
+      {
+        "site": "NYU",
+        "lr": 0.002,
+        "channels": 8,
+        "epochs": 150,
+        "inner_bacc": 0.7051282051282051
+      },
+      {
+        "site": "NeuroIMAGE",
+        "lr": 0.01,
+        "channels": 8,
+        "epochs": 150,
+        "inner_bacc": 0.6710942441492727
+      },
+      {
+        "site": "OHSU",
+        "lr": 0.002,
+        "channels": 16,
+        "epochs": 400,
+        "inner_bacc": 0.7090116945654665
+      },
+      {
+        "site": "Peking_1",
+        "lr": 0.002,
+        "channels": 8,
+        "epochs": 150,
+        "inner_bacc": 0.6614227086183311
+      },
+      {
+        "site": "Peking_2",
+        "lr": 0.01,
+        "channels": 16,
+        "epochs": 150,
+        "inner_bacc": 0.6962323390894819
+      },
+      {
+        "site": "Peking_3",
+        "lr": 0.002,
+        "channels": 16,
+        "epochs": 150,
+        "inner_bacc": 0.6656327543424317
+      }
+    ],
+    "Trainable-RBF": [
+      {
+        "site": "KKI",
+        "steps": 200,
+        "lr": 0.01,
+        "C": 0.1,
+        "inner_bacc": 0.6408371040723981
+      },
+      {
+        "site": "NYU",
+        "steps": 200,
+        "lr": 0.01,
+        "C": 1.0,
+        "inner_bacc": 0.627039627039627
+      },
+      {
+        "site": "NeuroIMAGE",
+        "steps": 200,
+        "lr": 0.01,
+        "C": 10.0,
+        "inner_bacc": 0.6729917773561038
+      },
+      {
+        "site": "OHSU",
+        "steps": 60,
+        "lr": 0.01,
+        "C": 1.0,
+        "inner_bacc": 0.6365512497133685
+      },
+      {
+        "site": "Peking_1",
+        "steps": 200,
+        "lr": 0.01,
+        "C": 1.0,
+        "inner_bacc": 0.6411308709530323
+      },
+      {
+        "site": "Peking_2",
+        "steps": 200,
+        "lr": 0.01,
+        "C": 0.1,
+        "inner_bacc": 0.6711145996860283
+      },
+      {
+        "site": "Peking_3",
+        "steps": 60,
+        "lr": 0.01,
+        "C": 1.0,
+        "inner_bacc": 0.6613937138130687
+      }
+    ],
+    "C-CNN": [
+      {
+        "site": "KKI",
+        "lr": 0.001,
+        "channels": 16,
+        "epochs": 120,
+        "inner_bacc": 0.6696832579185521
+      },
+      {
+        "site": "NYU",
+        "lr": 0.001,
+        "channels": 16,
+        "epochs": 120,
+        "inner_bacc": 0.7313519813519813
+      },
+      {
+        "site": "NeuroIMAGE",
+        "lr": 0.005,
+        "channels": 8,
+        "epochs": 40,
+        "inner_bacc": 0.6720430107526881
+      },
+      {
+        "site": "OHSU",
+        "lr": 0.02,
+        "channels": 16,
+        "epochs": 40,
+        "inner_bacc": 0.6396468699839486
+      },
+      {
+        "site": "Peking_1",
+        "lr": 0.005,
+        "channels": 8,
+        "epochs": 40,
+        "inner_bacc": 0.6672366621067032
+      },
+      {
+        "site": "Peking_2",
+        "lr": 0.005,
+        "channels": 16,
+        "epochs": 120,
+        "inner_bacc": 0.6970172684458399
+      },
+      {
+        "site": "Peking_3",
+        "lr": 0.005,
+        "channels": 16,
+        "epochs": 40,
+        "inner_bacc": 0.6619106699751861
+      }
+    ],
+    "C-MLP": [
+      {
+        "site": "KKI",
+        "lr": 0.005,
+        "width": 64,
+        "epochs": 120,
+        "inner_bacc": 0.6392533936651583
+      },
+      {
+        "site": "NYU",
+        "lr": 0.005,
+        "width": 64,
+        "epochs": 120,
+        "inner_bacc": 0.6963869463869463
+      },
+      {
+        "site": "NeuroIMAGE",
+        "lr": 0.005,
+        "width": 32,
+        "epochs": 120,
+        "inner_bacc": 0.6461100569259962
+      },
+      {
+        "site": "OHSU",
+        "lr": 0.02,
+        "width": 32,
+        "epochs": 120,
+        "inner_bacc": 0.6840174271955973
+      },
+      {
+        "site": "Peking_1",
+        "lr": 0.005,
+        "width": 32,
+        "epochs": 120,
+        "inner_bacc": 0.637482900136799
+      },
+      {
+        "site": "Peking_2",
+        "lr": 0.001,
+        "width": 64,
+        "epochs": 120,
+        "inner_bacc": 0.7017268445839875
+      },
+      {
+        "site": "Peking_3",
+        "lr": 0.005,
+        "width": 32,
+        "epochs": 40,
+        "inner_bacc": 0.6495037220843672
+      }
+    ]
+  },
+  "report": {
+    "CNN (1-D)": {
+      "pooled_tuned": {
+        "sensitivity": 0.3607142857142857,
+        "specificity": 0.5988200589970502,
+        "mcc": -0.04143426009689432,
+        "degenerate": false
+      },
+      "mean_tuned": {
+        "accuracy": 0.5006649872065567,
+        "f1": 0.39145876081249603,
+        "auc": 0.5328467971615719,
+        "specificity": 0.6061723143167629,
+        "train_accuracy": 0.6891622276104518
+      },
+      "mean_original": {
+        "accuracy": 0.4948775737838296,
+        "f1": 0.3851399027000611,
+        "auc": 0.5043034831498903,
+        "specificity": 0.6087380502862868
+      },
+      "comparisons": {
+        "QCNN vs original CNN (1-D) [accuracy]": {
+          "median_diff": 0.02985074626865669,
+          "p_value": 0.375,
+          "wins": 5,
+          "folds": 7
+        },
+        "QCNN vs tuned CNN (1-D) [accuracy]": {
+          "median_diff": -0.012820512820512886,
+          "p_value": 0.578125,
+          "wins": 3,
+          "folds": 7
+        },
+        "QCNN vs original CNN (1-D) [f1]": {
+          "median_diff": 0.040356592671161984,
+          "p_value": 0.296875,
+          "wins": 6,
+          "folds": 7
+        },
+        "QCNN vs tuned CNN (1-D) [f1]": {
+          "median_diff": -0.006993006993006978,
+          "p_value": 0.9375,
+          "wins": 3,
+          "folds": 7
+        },
+        "QCNN vs original CNN (1-D) [auc]": {
+          "median_diff": 0.05940850916637852,
+          "p_value": 0.046875,
+          "wins": 6,
+          "folds": 7
+        },
+        "QCNN vs tuned CNN (1-D) [auc]": {
+          "median_diff": 0.005217391304347729,
+          "p_value": 0.296875,
+          "wins": 4,
+          "folds": 7
+        },
+        "QCNN vs original CNN (1-D) [specificity]": {
+          "median_diff": 0.04347826086956519,
+          "p_value": 0.46875,
+          "wins": 5,
+          "folds": 7
+        },
+        "QCNN vs tuned CNN (1-D) [specificity]": {
+          "median_diff": -0.024390243902439046,
+          "p_value": 0.9375,
+          "wins": 3,
+          "folds": 7
+        }
+      }
+    },
+    "Trainable-RBF": {
+      "pooled_tuned": {
+        "sensitivity": 0.39285714285714285,
+        "specificity": 0.6991150442477876,
+        "mcc": 0.09646510555482883,
+        "degenerate": false
+      },
+      "mean_tuned": {
+        "accuracy": 0.5561338484339153,
+        "f1": 0.4120408988261155,
+        "auc": 0.5670309934905535,
+        "specificity": 0.7028960519354179,
+        "train_accuracy": 0.7163351644950867
+      },
+      "mean_original": {
+        "accuracy": 0.5621723059341022,
+        "f1": 0.4304525297574971,
+        "auc": 0.5538972622717578,
+        "specificity": 0.688150164576076
+      },
+      "comparisons": {
+        "TQEK vs original Trainable-RBF [accuracy]": {
+          "median_diff": 0.0,
+          "p_value": 0.4375,
+          "wins": 2,
+          "folds": 7
+        },
+        "TQEK vs tuned Trainable-RBF [accuracy]": {
+          "median_diff": 0.0,
+          "p_value": 0.84375,
+          "wins": 3,
+          "folds": 7
+        },
+        "TQEK vs original Trainable-RBF [f1]": {
+          "median_diff": 0.002358490566037763,
+          "p_value": 1.0,
+          "wins": 4,
+          "folds": 7
+        },
+        "TQEK vs tuned Trainable-RBF [f1]": {
+          "median_diff": -0.013808975834292303,
+          "p_value": 0.84375,
+          "wins": 2,
+          "folds": 7
+        },
+        "TQEK vs original Trainable-RBF [auc]": {
+          "median_diff": -0.000683060109289646,
+          "p_value": 0.9375,
+          "wins": 3,
+          "folds": 7
+        },
+        "TQEK vs tuned Trainable-RBF [auc]": {
+          "median_diff": 0.012295081967213073,
+          "p_value": 1.0,
+          "wins": 4,
+          "folds": 7
+        },
+        "TQEK vs original Trainable-RBF [specificity]": {
+          "median_diff": -0.016393442622950727,
+          "p_value": 0.4375,
+          "wins": 2,
+          "folds": 7
+        },
+        "TQEK vs tuned Trainable-RBF [specificity]": {
+          "median_diff": 0.0,
+          "p_value": 0.625,
+          "wins": 2,
+          "folds": 7
+        }
+      }
+    },
+    "C-CNN": {
+      "pooled_tuned": {
+        "sensitivity": 0.3607142857142857,
+        "specificity": 0.5781710914454278,
+        "mcc": -0.06224628740846025,
+        "degenerate": false
+      },
+      "mean_tuned": {
+        "accuracy": 0.487443601957987,
+        "f1": 0.37156483548315056,
+        "auc": 0.5209880495599696,
+        "specificity": 0.5923433722594116,
+        "train_accuracy": 0.6841292122443595
+      },
+      "mean_original": {
+        "accuracy": 0.48246620305974613,
+        "f1": 0.3933820692544958,
+        "auc": 0.5098143733902477,
+        "specificity": 0.5582233911480408
+      },
+      "comparisons": {
+        "Q-Plain vs original C-CNN [accuracy]": {
+          "median_diff": 0.038461538461538436,
+          "p_value": 0.03125,
+          "wins": 6,
+          "folds": 7
+        },
+        "Q-Plain vs tuned C-CNN [accuracy]": {
+          "median_diff": 0.04166666666666663,
+          "p_value": 0.296875,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Plain vs original C-CNN [f1]": {
+          "median_diff": 0.034330011074197087,
+          "p_value": 0.109375,
+          "wins": 6,
+          "folds": 7
+        },
+        "Q-Plain vs tuned C-CNN [f1]": {
+          "median_diff": 0.03623188405797101,
+          "p_value": 0.15625,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Plain vs original C-CNN [auc]": {
+          "median_diff": 0.04644808743169415,
+          "p_value": 0.046875,
+          "wins": 6,
+          "folds": 7
+        },
+        "Q-Plain vs tuned C-CNN [auc]": {
+          "median_diff": 0.03392857142857131,
+          "p_value": 0.078125,
+          "wins": 6,
+          "folds": 7
+        },
+        "Q-Plain vs original C-CNN [specificity]": {
+          "median_diff": 0.032786885245901676,
+          "p_value": 0.0625,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Plain vs tuned C-CNN [specificity]": {
+          "median_diff": 0.0,
+          "p_value": 1.0,
+          "wins": 3,
+          "folds": 7
+        },
+        "Q-Reup1 vs original C-CNN [accuracy]": {
+          "median_diff": 0.04761904761904756,
+          "p_value": 0.015625,
+          "wins": 7,
+          "folds": 7
+        },
+        "Q-Reup1 vs tuned C-CNN [accuracy]": {
+          "median_diff": 0.020833333333333315,
+          "p_value": 0.21875,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup1 vs original C-CNN [f1]": {
+          "median_diff": 0.035759897828863296,
+          "p_value": 0.15625,
+          "wins": 6,
+          "folds": 7
+        },
+        "Q-Reup1 vs tuned C-CNN [f1]": {
+          "median_diff": 0.05503577325261416,
+          "p_value": 0.21875,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Reup1 vs original C-CNN [auc]": {
+          "median_diff": 0.02086956521739136,
+          "p_value": 0.03125,
+          "wins": 6,
+          "folds": 7
+        },
+        "Q-Reup1 vs tuned C-CNN [auc]": {
+          "median_diff": 0.037574159525379014,
+          "p_value": 0.15625,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Reup1 vs original C-CNN [specificity]": {
+          "median_diff": 0.08196721311475408,
+          "p_value": 0.078125,
+          "wins": 6,
+          "folds": 7
+        },
+        "Q-Reup1 vs tuned C-CNN [specificity]": {
+          "median_diff": 0.04081632653061229,
+          "p_value": 0.6875,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup2 vs original C-CNN [accuracy]": {
+          "median_diff": 0.04166666666666663,
+          "p_value": 0.015625,
+          "wins": 7,
+          "folds": 7
+        },
+        "Q-Reup2 vs tuned C-CNN [accuracy]": {
+          "median_diff": 0.04819277108433734,
+          "p_value": 0.21875,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Reup2 vs original C-CNN [f1]": {
+          "median_diff": 0.017017169562125345,
+          "p_value": 0.375,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup2 vs tuned C-CNN [f1]": {
+          "median_diff": 0.06349206349206349,
+          "p_value": 0.21875,
+          "wins": 6,
+          "folds": 7
+        },
+        "Q-Reup2 vs original C-CNN [auc]": {
+          "median_diff": 0.03999999999999998,
+          "p_value": 0.015625,
+          "wins": 7,
+          "folds": 7
+        },
+        "Q-Reup2 vs tuned C-CNN [auc]": {
+          "median_diff": 0.04482531311799598,
+          "p_value": 0.078125,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Reup2 vs original C-CNN [specificity]": {
+          "median_diff": 0.10204081632653061,
+          "p_value": 0.078125,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Reup2 vs tuned C-CNN [specificity]": {
+          "median_diff": 0.032786885245901676,
+          "p_value": 0.328125,
+          "wins": 5,
+          "folds": 7
+        }
+      }
+    },
+    "C-MLP": {
+      "pooled_tuned": {
+        "sensitivity": 0.43214285714285716,
+        "specificity": 0.6106194690265486,
+        "mcc": 0.04329516342083512,
+        "degenerate": false
+      },
+      "mean_tuned": {
+        "accuracy": 0.5289501920063423,
+        "f1": 0.42994721637127914,
+        "auc": 0.5499036834965445,
+        "specificity": 0.6202169927440356,
+        "train_accuracy": 0.7303503591160893
+      },
+      "mean_original": {
+        "accuracy": 0.5131192155515587,
+        "f1": 0.4183812467993375,
+        "auc": 0.5556935896981675,
+        "specificity": 0.5990271070555172
+      },
+      "comparisons": {
+        "Q-Plain vs original C-MLP [accuracy]": {
+          "median_diff": 0.02409638554216864,
+          "p_value": 0.578125,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Plain vs tuned C-MLP [accuracy]": {
+          "median_diff": -0.012820512820512886,
+          "p_value": 0.84375,
+          "wins": 2,
+          "folds": 7
+        },
+        "Q-Plain vs original C-MLP [f1]": {
+          "median_diff": 0.01222561822728535,
+          "p_value": 0.46875,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Plain vs tuned C-MLP [f1]": {
+          "median_diff": -0.0020544427324088455,
+          "p_value": 0.9375,
+          "wins": 3,
+          "folds": 7
+        },
+        "Q-Plain vs original C-MLP [auc]": {
+          "median_diff": 0.005464480874317057,
+          "p_value": 0.9375,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Plain vs tuned C-MLP [auc]": {
+          "median_diff": -0.0022883295194507935,
+          "p_value": 0.9375,
+          "wins": 3,
+          "folds": 7
+        },
+        "Q-Plain vs original C-MLP [specificity]": {
+          "median_diff": 0.024390243902439046,
+          "p_value": 0.578125,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Plain vs tuned C-MLP [specificity]": {
+          "median_diff": -0.032786885245901676,
+          "p_value": 0.578125,
+          "wins": 3,
+          "folds": 7
+        },
+        "Q-Reup1 vs original C-MLP [accuracy]": {
+          "median_diff": 0.020833333333333315,
+          "p_value": 0.5625,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup1 vs tuned C-MLP [accuracy]": {
+          "median_diff": -0.012820512820512886,
+          "p_value": 0.9375,
+          "wins": 3,
+          "folds": 7
+        },
+        "Q-Reup1 vs original C-MLP [f1]": {
+          "median_diff": 0.012987012987012991,
+          "p_value": 0.46875,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Reup1 vs tuned C-MLP [f1]": {
+          "median_diff": 0.007772020725388629,
+          "p_value": 0.6875,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup1 vs original C-MLP [auc]": {
+          "median_diff": 0.002594258042200037,
+          "p_value": 0.9375,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup1 vs tuned C-MLP [auc]": {
+          "median_diff": 0.006147540983606592,
+          "p_value": 0.578125,
+          "wins": 5,
+          "folds": 7
+        },
+        "Q-Reup1 vs original C-MLP [specificity]": {
+          "median_diff": 0.04878048780487809,
+          "p_value": 0.4375,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup1 vs tuned C-MLP [specificity]": {
+          "median_diff": 0.0,
+          "p_value": 1.0,
+          "wins": 3,
+          "folds": 7
+        },
+        "Q-Reup2 vs original C-MLP [accuracy]": {
+          "median_diff": 0.01851851851851849,
+          "p_value": 0.578125,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup2 vs tuned C-MLP [accuracy]": {
+          "median_diff": 0.0,
+          "p_value": 0.6875,
+          "wins": 3,
+          "folds": 7
+        },
+        "Q-Reup2 vs original C-MLP [f1]": {
+          "median_diff": 0.007112375533428195,
+          "p_value": 0.8125,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup2 vs tuned C-MLP [f1]": {
+          "median_diff": 0.00797448165869219,
+          "p_value": 1.0,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup2 vs original C-MLP [auc]": {
+          "median_diff": -0.00017295053614652112,
+          "p_value": 1.0,
+          "wins": 3,
+          "folds": 7
+        },
+        "Q-Reup2 vs tuned C-MLP [auc]": {
+          "median_diff": 0.012711864406779738,
+          "p_value": 0.8125,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup2 vs original C-MLP [specificity]": {
+          "median_diff": 0.04347826086956519,
+          "p_value": 0.1875,
+          "wins": 4,
+          "folds": 7
+        },
+        "Q-Reup2 vs tuned C-MLP [specificity]": {
+          "median_diff": 0.0,
+          "p_value": 1.0,
+          "wins": 3,
+          "folds": 7
+        }
+      }
+    }
+  },
+  "timestamp": "20261119-081710Z"
+}

@@ -1,0 +1,100 @@
+mdd: (2428, 19900)
+  S1           CNN (1-D)=0.493  Trainable-RBF=0.486  C-CNN=0.480  C-MLP=0.493
+  S10          CNN (1-D)=0.542  Trainable-RBF=0.602  C-CNN=0.542  C-MLP=0.518
+  S11          CNN (1-D)=0.590  Trainable-RBF=0.541  C-CNN=0.557  C-MLP=0.492
+  S12          CNN (1-D)=0.395  Trainable-RBF=0.579  C-CNN=0.342  C-MLP=0.526
+  S13          CNN (1-D)=0.429  Trainable-RBF=0.452  C-CNN=0.452  C-MLP=0.429
+  S14          CNN (1-D)=0.521  Trainable-RBF=0.823  C-CNN=0.656  C-MLP=0.646
+  S15          CNN (1-D)=0.570  Trainable-RBF=0.550  C-CNN=0.620  C-MLP=0.550
+  S16          CNN (1-D)=0.403  Trainable-RBF=0.500  C-CNN=0.516  C-MLP=0.516
+  S17          CNN (1-D)=0.473  Trainable-RBF=0.538  C-CNN=0.538  C-MLP=0.495
+  S18          CNN (1-D)=0.415  Trainable-RBF=0.561  C-CNN=0.488  C-MLP=0.463
+  S19          CNN (1-D)=0.713  Trainable-RBF=0.701  C-CNN=0.759  C-MLP=0.713
+  S2           CNN (1-D)=0.517  Trainable-RBF=0.583  C-CNN=0.533  C-MLP=0.483
+  S20          CNN (1-D)=0.505  Trainable-RBF=0.527  C-CNN=0.537  C-MLP=0.546
+  S21          CNN (1-D)=0.532  Trainable-RBF=0.615  C-CNN=0.538  C-MLP=0.545
+  S22          CNN (1-D)=0.720  Trainable-RBF=0.680  C-CNN=0.760  C-MLP=0.740
+  S23          CNN (1-D)=0.516  Trainable-RBF=0.548  C-CNN=0.500  C-MLP=0.548
+  S24          CNN (1-D)=0.429  Trainable-RBF=0.524  C-CNN=0.444  C-MLP=0.460
+  S25          CNN (1-D)=0.520  Trainable-RBF=0.592  C-CNN=0.559  C-MLP=0.553
+  S3           CNN (1-D)=0.359  Trainable-RBF=0.438  C-CNN=0.453  C-MLP=0.391
+  S4           CNN (1-D)=0.604  Trainable-RBF=0.979  C-CNN=0.688  C-MLP=0.583
+  S5           CNN (1-D)=0.625  Trainable-RBF=0.542  C-CNN=0.625  C-MLP=0.500
+  S6           CNN (1-D)=0.600  Trainable-RBF=0.533  C-CNN=0.600  C-MLP=0.533
+  S7           CNN (1-D)=0.540  Trainable-RBF=0.494  C-CNN=0.494  C-MLP=0.483
+  S8           CNN (1-D)=0.500  Trainable-RBF=0.540  C-CNN=0.507  C-MLP=0.527
+  S9           CNN (1-D)=0.620  Trainable-RBF=0.610  C-CNN=0.600  C-MLP=0.590
+
+CNN (1-D): pooled tuned {'sensitivity': 0.4084615384615385, 'specificity': 0.6524822695035462, 'mcc': 0.06261620063034803, 'degenerate': False}
+  QCNN vs original CNN (1-D) [accuracy]                      +0.000  p=0.1219
+  QCNN vs tuned CNN (1-D) [accuracy]                         +0.000  p=0.6476
+  QCNN vs original CNN (1-D) [f1]                            -0.011  p=0.2192
+  QCNN vs tuned CNN (1-D) [f1]                               +0.009  p=0.8119
+  QCNN vs original CNN (1-D) [auc]                           -0.003  p=0.3666
+  QCNN vs tuned CNN (1-D) [auc]                              -0.006  p=0.2521
+  QCNN vs original CNN (1-D) [specificity]                   +0.000  p=0.0640
+  QCNN vs tuned CNN (1-D) [specificity]                      -0.042  p=0.2139
+
+Trainable-RBF: pooled tuned {'sensitivity': 0.7476923076923077, 'specificity': 0.3670212765957447, 'mcc': 0.12419678049363635, 'degenerate': False}
+  TQEK vs original Trainable-RBF [accuracy]                  -0.013  p=0.2735
+  TQEK vs tuned Trainable-RBF [accuracy]                     -0.047  p=0.0089
+  TQEK vs original Trainable-RBF [f1]                        -0.190  p=0.0000
+  TQEK vs tuned Trainable-RBF [f1]                           -0.187  p=0.0000
+  TQEK vs original Trainable-RBF [auc]                       +0.029  p=0.5424
+  TQEK vs tuned Trainable-RBF [auc]                          +0.033  p=0.4908
+  TQEK vs original Trainable-RBF [specificity]               +0.471  p=0.0000
+  TQEK vs tuned Trainable-RBF [specificity]                  +0.333  p=0.0000
+
+C-CNN: pooled tuned {'sensitivity': 0.4530769230769231, 'specificity': 0.6586879432624113, 'mcc': 0.11372864041766431, 'degenerate': False}
+  Q-Plain vs original C-CNN [accuracy]                       +0.000  p=0.8077
+  Q-Plain vs tuned C-CNN [accuracy]                          -0.024  p=0.0150
+  Q-Plain vs original C-CNN [f1]                             +0.023  p=0.1073
+  Q-Plain vs tuned C-CNN [f1]                                -0.022  p=0.3123
+  Q-Plain vs original C-CNN [auc]                            -0.017  p=0.0393
+  Q-Plain vs tuned C-CNN [auc]                               -0.014  p=0.0042
+  Q-Plain vs original C-CNN [specificity]                    -0.042  p=0.0078
+  Q-Plain vs tuned C-CNN [specificity]                       -0.027  p=0.2416
+  Q-Reup1 vs original C-CNN [accuracy]                       +0.007  p=0.9515
+  Q-Reup1 vs tuned C-CNN [accuracy]                          -0.024  p=0.0653
+  Q-Reup1 vs original C-CNN [f1]                             +0.020  p=0.1485
+  Q-Reup1 vs tuned C-CNN [f1]                                -0.017  p=0.4108
+  Q-Reup1 vs original C-CNN [auc]                            -0.016  p=0.0013
+  Q-Reup1 vs tuned C-CNN [auc]                               -0.023  p=0.0000
+  Q-Reup1 vs original C-CNN [specificity]                    -0.056  p=0.0156
+  Q-Reup1 vs tuned C-CNN [specificity]                       -0.033  p=0.3104
+  Q-Reup2 vs original C-CNN [accuracy]                       +0.000  p=0.3703
+  Q-Reup2 vs tuned C-CNN [accuracy]                          -0.033  p=0.0156
+  Q-Reup2 vs original C-CNN [f1]                             +0.016  p=0.1730
+  Q-Reup2 vs tuned C-CNN [f1]                                -0.022  p=0.4405
+  Q-Reup2 vs original C-CNN [auc]                            -0.021  p=0.0000
+  Q-Reup2 vs tuned C-CNN [auc]                               -0.026  p=0.0000
+  Q-Reup2 vs original C-CNN [specificity]                    -0.060  p=0.0021
+  Q-Reup2 vs tuned C-CNN [specificity]                       -0.041  p=0.1245
+
+C-MLP: pooled tuned {'sensitivity': 0.4546153846153846, 'specificity': 0.6365248226950354, 'mcc': 0.0923436874636801, 'degenerate': False}
+  Q-Plain vs original C-MLP [accuracy]                       +0.012  p=0.6482
+  Q-Plain vs tuned C-MLP [accuracy]                          +0.000  p=0.8213
+  Q-Plain vs original C-MLP [f1]                             +0.000  p=0.3758
+  Q-Plain vs tuned C-MLP [f1]                                -0.021  p=0.0345
+  Q-Plain vs original C-MLP [auc]                            +0.019  p=0.0802
+  Q-Plain vs tuned C-MLP [auc]                               +0.012  p=0.1817
+  Q-Plain vs original C-MLP [specificity]                    +0.000  p=0.2172
+  Q-Plain vs tuned C-MLP [specificity]                       +0.000  p=0.2046
+  Q-Reup1 vs original C-MLP [accuracy]                       +0.016  p=0.5872
+  Q-Reup1 vs tuned C-MLP [accuracy]                          +0.000  p=0.8433
+  Q-Reup1 vs original C-MLP [f1]                             +0.013  p=0.2996
+  Q-Reup1 vs tuned C-MLP [f1]                                -0.011  p=0.2200
+  Q-Reup1 vs original C-MLP [auc]                            +0.003  p=0.4042
+  Q-Reup1 vs tuned C-MLP [auc]                               +0.001  p=0.3957
+  Q-Reup1 vs original C-MLP [specificity]                    -0.028  p=0.1909
+  Q-Reup1 vs tuned C-MLP [specificity]                       +0.000  p=0.1570
+  Q-Reup2 vs original C-MLP [accuracy]                       +0.000  p=0.6292
+  Q-Reup2 vs tuned C-MLP [accuracy]                          -0.012  p=0.2776
+  Q-Reup2 vs original C-MLP [f1]                             -0.002  p=0.3944
+  Q-Reup2 vs tuned C-MLP [f1]                                -0.024  p=0.0957
+  Q-Reup2 vs original C-MLP [auc]                            -0.005  p=0.8119
+  Q-Reup2 vs tuned C-MLP [auc]                               -0.005  p=0.7112
+  Q-Reup2 vs original C-MLP [specificity]                    -0.028  p=0.0990
+  Q-Reup2 vs tuned C-MLP [specificity]                       +0.013  p=0.2046
+
+saved: results/revision/sens_mdd/baseline_sensitivity.json
