@@ -1,0 +1,429 @@
+{
+  "config": {
+    "data_root": "data/ABIDE-I",
+    "pipeline": "cpac",
+    "strategy": "filt_noglobal",
+    "atlas": "rois_cc200",
+    "n_qubits": "8",
+    "backend": "torch",
+    "k_neighbors": "20",
+    "topology": "mixed",
+    "epochs": "30",
+    "lr": "0.01",
+    "hidden_dim": "32",
+    "heads": "4",
+    "dropout": "0.6",
+    "readout": "mean",
+    "seed": "0",
+    "min_test_size": "10",
+    "limit": "None",
+    "out": "results/graph_foldwise_q8.json"
+  },
+  "n_subjects": 1035,
+  "results": {
+    "Proposed (quantum + GAT)": {
+      "mean_ci": {
+        "f1": [
+          0.19601626086415683,
+          0.13488456633182017
+        ],
+        "accuracy": [
+          0.5044402552146037,
+          0.027852384965385456
+        ],
+        "specificity": [
+          0.7,
+          0.2060577333508359
+        ],
+        "sensitivity": [
+          0.3,
+          0.2060577333508359
+        ]
+      },
+      "folds": [
+        {
+          "site": "",
+          "n_test": 37,
+          "f1": 0.0,
+          "accuracy": 0.4864864864864865,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 0.0062118588636318845
+        },
+        {
+          "site": "",
+          "n_test": 27,
+          "f1": 0.0,
+          "accuracy": 0.48148148148148145,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 0.0002251220284961164
+        },
+        {
+          "site": "",
+          "n_test": 48,
+          "f1": 0.0,
+          "accuracy": 0.5833333333333334,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.5849643671591213e-08
+        },
+        {
+          "site": "",
+          "n_test": 29,
+          "f1": 0.0,
+          "accuracy": 0.5172413793103449,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 0.5030183345079422
+        },
+        {
+          "site": "",
+          "n_test": 34,
+          "f1": 0.6122448979591837,
+          "accuracy": 0.4411764705882353,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 0.02717409593363603
+        },
+        {
+          "site": "",
+          "n_test": 52,
+          "f1": 0.0,
+          "accuracy": 0.5384615384615384,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 9.451454552333871e-08
+        },
+        {
+          "site": "",
+          "n_test": 175,
+          "f1": 0.0,
+          "accuracy": 0.5714285714285714,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 3.8950383565282785e-05
+        },
+        {
+          "site": "",
+          "n_test": 26,
+          "f1": 0.631578947368421,
+          "accuracy": 0.46153846153846156,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 1.485623291053173e-09
+        },
+        {
+          "site": "",
+          "n_test": 34,
+          "f1": 0.7169811320754716,
+          "accuracy": 0.5588235294117647,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 0.0058673421541849775
+        },
+        {
+          "site": "",
+          "n_test": 56,
+          "f1": 0.0,
+          "accuracy": 0.48214285714285715,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 6.0071757616242394e-05
+        },
+        {
+          "site": "",
+          "n_test": 30,
+          "f1": 0.6666666666666666,
+          "accuracy": 0.5,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 1.384618872179999e-05
+        },
+        {
+          "site": "",
+          "n_test": 36,
+          "f1": 0.0,
+          "accuracy": 0.6111111111111112,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 4.769690349348821e-06
+        },
+        {
+          "site": "",
+          "n_test": 39,
+          "f1": 0.6551724137931034,
+          "accuracy": 0.48717948717948717,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 0.3618472218513489
+        },
+        {
+          "site": "",
+          "n_test": 47,
+          "f1": 0.6376811594202898,
+          "accuracy": 0.46808510638297873,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 6.026758470056848e-08
+        },
+        {
+          "site": "",
+          "n_test": 72,
+          "f1": 0.0,
+          "accuracy": 0.4305555555555556,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 6.745677546859952e-06
+        },
+        {
+          "site": "",
+          "n_test": 26,
+          "f1": 0.0,
+          "accuracy": 0.5,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 0.4723066985607147
+        },
+        {
+          "site": "",
+          "n_test": 106,
+          "f1": 0.0,
+          "accuracy": 0.5,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.8046992149070968e-05
+        },
+        {
+          "site": "",
+          "n_test": 34,
+          "f1": 0.0,
+          "accuracy": 0.6176470588235294,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 4.825080957004957e-08
+        },
+        {
+          "site": "",
+          "n_test": 71,
+          "f1": 0.0,
+          "accuracy": 0.352112676056338,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 0.00010089072166010737
+        },
+        {
+          "site": "",
+          "n_test": 56,
+          "f1": 0.0,
+          "accuracy": 0.5,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": -2.7644273981053402e-08
+        }
+      ]
+    },
+    "Ablation (quantum + GCN)": {
+      "mean_ci": {
+        "f1": [
+          0.13264539527654245,
+          0.1194821664817865
+        ],
+        "accuracy": [
+          0.5116046594378314,
+          0.027431974272094574
+        ],
+        "specificity": [
+          0.8,
+          0.1798619353545204
+        ],
+        "sensitivity": [
+          0.2,
+          0.17986193535452044
+        ]
+      },
+      "folds": [
+        {
+          "site": "",
+          "n_test": 37,
+          "f1": 0.0,
+          "accuracy": 0.4864864864864865,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 27,
+          "f1": 0.0,
+          "accuracy": 0.48148148148148145,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 48,
+          "f1": 0.0,
+          "accuracy": 0.5833333333333334,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 29,
+          "f1": 0.0,
+          "accuracy": 0.5172413793103449,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 34,
+          "f1": 0.0,
+          "accuracy": 0.5588235294117647,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 0.0
+        },
+        {
+          "site": "",
+          "n_test": 52,
+          "f1": 0.0,
+          "accuracy": 0.5384615384615384,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 175,
+          "f1": 0.0,
+          "accuracy": 0.5714285714285714,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 0.0
+        },
+        {
+          "site": "",
+          "n_test": 26,
+          "f1": 0.631578947368421,
+          "accuracy": 0.46153846153846156,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 0.0
+        },
+        {
+          "site": "",
+          "n_test": 34,
+          "f1": 0.7169811320754716,
+          "accuracy": 0.5588235294117647,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 56,
+          "f1": 0.0,
+          "accuracy": 0.48214285714285715,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 30,
+          "f1": 0.6666666666666666,
+          "accuracy": 0.5,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 36,
+          "f1": 0.0,
+          "accuracy": 0.6111111111111112,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 39,
+          "f1": 0.0,
+          "accuracy": 0.5128205128205128,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 0.0
+        },
+        {
+          "site": "",
+          "n_test": 47,
+          "f1": 0.6376811594202898,
+          "accuracy": 0.46808510638297873,
+          "specificity": 0.0,
+          "sensitivity": 1.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 72,
+          "f1": 0.0,
+          "accuracy": 0.4305555555555556,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 26,
+          "f1": 0.0,
+          "accuracy": 0.5,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 106,
+          "f1": 0.0,
+          "accuracy": 0.5,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 34,
+          "f1": 0.0,
+          "accuracy": 0.6176470588235294,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 71,
+          "f1": 0.0,
+          "accuracy": 0.352112676056338,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        },
+        {
+          "site": "",
+          "n_test": 56,
+          "f1": 0.0,
+          "accuracy": 0.5,
+          "specificity": 1.0,
+          "sensitivity": 0.0,
+          "mad": 1.0
+        }
+      ]
+    }
+  }
+}
