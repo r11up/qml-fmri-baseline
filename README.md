@@ -218,7 +218,9 @@ pip install -e ".[dev,viz,quantum,neuro]"
 `quantum` brings PennyLane and the lightning simulator; `neuro` brings nilearn
 for dataset access. The built-in PyTorch simulator needs neither, so
 `pip install -e ".[dev]"` is enough for the generic framework. An optional
-Qiskit reference path installs with `pip install -e ".[qiskit]"`.
+Qiskit reference path installs with `pip install -e ".[qiskit]"`. The exact
+package versions used for the resubmission experiments are pinned in
+`requirements-lock.txt` (Python 3.13.7, CPU only).
 
 ## Reproducing the study
 
@@ -233,6 +235,17 @@ python scripts/run_quantum_models.py --data-root data/ABIDE-I --out results/qmod
 `run_quantum_models.py` is the main experiment: it trains all five quantum
 families and their matched classical comparators under leave-site-out folds and
 writes per-fold records plus paired tests to a single JSON.
+
+It also records training accuracy for every model, and
+`--connectivity mutual_information` swaps Pearson correlation for a rank-based
+mutual-information measure that registers non-linear dependence.
+
+The experiments added for the IEEE Access resubmission run from one driver,
+four jobs at a time, and write to `results/revision/`:
+
+```bash
+bash scripts/run_revision.sh
+```
 
 To recompute summaries from the stored records without retraining:
 
@@ -321,6 +334,7 @@ src/qagta/
     variational.py    variational classifier: ZZFeatureMap, RealAmplitudes, parity read-out
     kernel.py         fidelity kernel and Gram-matrix construction
     trainable_kernel.py  quantum embedding kernel trained by kernel-target alignment
+    tensor_vqc.py     TTN-VQC and TensorHyper-VQC (Qi et al.) and parameter-matched classical twins
     graph_transformer.py quantum self-attention: query and key share one register
     hybrid.py         learned projection feeding a quantum or classical head (Plan A)
     ensemble.py       ensembles of narrow circuits over disjoint feature blocks (Plan B)
@@ -331,7 +345,7 @@ src/qagta/
   graph/            adaptive edge learning, connectome construction
   models/           graph attention and SAGE encoders, gated decision module
   training/         training loops, baselines, leave-site-out evaluation
-  data/             cohort loaders, connectivity descriptors, feature compression
+  data/             cohort loaders, connectivity descriptors (Pearson or mutual information), feature compression
   pipeline.py       end-to-end orchestration
 
 scripts/
@@ -355,6 +369,10 @@ scripts/
   run_graph_foldwise.py   graph study with a fold-wise PCA basis (finding 26)
   run_graph_trained_encoder.py graph study with the quantum encoder trained jointly (finding 27)
   run_shot_budget.py      shot budgets and projected kernels for the quantum kernel
+  # resubmission experiments (driver: run_revision.sh)
+  run_tensor_vqc.py       TTN-VQC and TensorHyper-VQC on 2,000 features against matched twins
+  run_baseline_sensitivity.py do the quantum wins survive classical comparators retuned per fold?
+  run_kernel_generalization.py does effective dimension track generalization for both kernels?
   # analysis and reporting
   advantage_sweep.py      every matched comparison, screened for degenerate comparators
   analyse_plans.py        pools a plan across cohorts, flags which arm loses each test
@@ -366,13 +384,14 @@ scripts/
   ingest_adhd200_athena.py, make_mdd_phenotypic.py, generate_data.py
   # drivers
   run_all_cohorts.sh, run_plans_ab_cohorts.sh, run_qgt_all.sh, run_sweep.sh,
-  rerun_after_fix.sh, rerun_parallel.sh, resume_rerun22.sh, run_encoder_ab.sh
+  rerun_after_fix.sh, rerun_parallel.sh, resume_rerun22.sh, run_encoder_ab.sh,
+  run_revision.sh
 
 findings/         one file per measured result, 01 to 28; see findings/README.md
 results/          per-fold metrics and figures; see results/README.md
   rerun22/          the corrected runs behind every number in the paper
 docs/figures/     figures used in this README
-tests/            81 tests covering the simulator, models, graph and pipeline
+tests/            86 tests covering the simulator, models, graph and pipeline
 ```
 
 ### Where to start

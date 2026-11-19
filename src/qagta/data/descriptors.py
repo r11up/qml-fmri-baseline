@@ -64,17 +64,46 @@ def graph_descriptor(timeseries: np.ndarray, threshold: float = 0.3) -> np.ndarr
     return np.nan_to_num(np.asarray(features, dtype=np.float32))
 
 
+def mutual_information_connectivity(timeseries: np.ndarray, bins: int = 8) -> np.ndarray:
+    """Pairwise mutual information (nats) from a ``(T, n_roi)`` BOLD matrix.
+
+    Each regional series is rank-transformed onto ``bins`` equiprobable levels
+    (a copula estimate), so the measure is invariant to monotone transforms and,
+    unlike Pearson correlation, registers non-linear dependence. The Miller-Madow
+    term removes the first-order bias, which otherwise grows as the scan
+    shortens and would differ between sites.
+    """
+    t, regions = timeseries.shape
+    ranks = np.argsort(np.argsort(timeseries, axis=0, kind="stable"), axis=0, kind="stable")
+    codes = np.minimum(ranks * bins // t, bins - 1)
+    onehot = np.zeros((t, regions * bins), dtype=np.float64)
+    onehot[np.arange(t)[:, None], np.arange(regions)[None, :] * bins + codes] = 1.0
+    joint = (onehot.T @ onehot / t).reshape(regions, bins, regions, bins)
+    marginal = onehot.mean(axis=0).reshape(regions, bins)
+    outer = marginal[:, :, None, None] * marginal[None, None, :, :]
+    with np.errstate(divide="ignore", invalid="ignore"):
+        terms = np.where(joint > 0, joint * np.log(joint / outer), 0.0)
+    mi = terms.sum(axis=(1, 3)) - (bins - 1) ** 2 / (2 * t)
+    np.fill_diagonal(mi, 0.0)
+    return mi
+
+
 def build_descriptors(timeseries_list, kind: str = "correlation") -> np.ndarray:
     """Stack per-subject descriptors of the requested kind.
 
     ``correlation`` returns the flattened upper triangle (high-dimensional,
-    the classical default). ``graph`` returns the network summary above.
-    ``both`` concatenates them.
+    the classical default). ``mutual_information`` returns the same upper
+    triangle of the rank-based mutual-information matrix, a non-linear
+    dependence measure. ``graph`` returns the network summary above.
+    ``both`` concatenates correlation and graph.
     """
     rows = []
     for series in timeseries_list:
         if kind == "correlation":
             matrix = pearson_connectivity(series)
+            rows.append(matrix[np.triu_indices_from(matrix, k=1)])
+        elif kind == "mutual_information":
+            matrix = mutual_information_connectivity(series)
             rows.append(matrix[np.triu_indices_from(matrix, k=1)])
         elif kind == "graph":
             rows.append(graph_descriptor(series))

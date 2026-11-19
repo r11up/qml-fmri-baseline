@@ -76,11 +76,13 @@ def select_features(x_train, y_train, k):
 
 def metrics(y_true, y_pred, scores=None):
     matrix = confusion_matrix(y_true, y_pred, labels=[0, 1])
-    tn, fp, _, _ = matrix.ravel()
+    tn, fp, fn, tp = (int(v) for v in matrix.ravel())
     out = {
         "f1": float(f1_score(y_true, y_pred, zero_division=0)),
         "accuracy": float(accuracy_score(y_true, y_pred)),
         "specificity": float(tn / (tn + fp)) if (tn + fp) else float("nan"),
+        "sensitivity": float(tp / (tp + fn)) if (tp + fn) else float("nan"),
+        "tn": tn, "fp": fp, "fn": fn, "tp": tp,
     }
     if scores is not None and len(np.unique(y_true)) > 1:
         out["auc"] = float(roc_auc_score(y_true, scores))
@@ -107,7 +109,10 @@ def train_torch_classifier(model, x_train, y_train, x_test, epochs=150, lr=0.05,
     with torch.no_grad():
         logits = model(torch.as_tensor(x_test, dtype=torch.float32))
         probs = F.softmax(logits, dim=1)[:, 1].numpy()
-    return logits.argmax(1).numpy(), probs
+        # Training accuracy is read after the test pass and consumes no random
+        # numbers, so recording it leaves every test prediction unchanged.
+        train_acc = float(accuracy_score(y_train, model(xt).argmax(1).numpy()))
+    return logits.argmax(1).numpy(), probs, train_acc
 
 
 class Classical1DCNN(torch.nn.Module):
@@ -144,6 +149,12 @@ def main() -> int:
     parser.add_argument("--folds", type=int, default=10)
     parser.add_argument("--min-test-size", type=int, default=10)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--connectivity", default="correlation",
+                        choices=["correlation", "mutual_information"],
+                        help="pairwise measure the features are selected from")
+    parser.add_argument("--drop-single-class-sites", action="store_true",
+                        help="exclude subjects of sites that hold only one class, which "
+                             "otherwise train in every fold but are never tested")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
@@ -162,10 +173,14 @@ def main() -> int:
     series_dir = args.data_root / "ABIDE_pcp" / args.pipeline / args.strategy
     connectivity = build_descriptors(
         [np.loadtxt(series_dir / f"{s.file_id}_{args.atlas}.1D") for s in dataset.subjects],
-        kind="correlation",
+        kind=args.connectivity,
     )
     labels, sites = dataset.labels, dataset.sites
-    print(f"connectivity: {connectivity.shape}\n")
+    if args.drop_single_class_sites:
+        keep = np.array([len(set(labels[sites == s].tolist())) > 1 for s in sites])
+        connectivity, labels, sites = connectivity[keep], labels[keep], sites[keep]
+        print(f"dropped {int((~keep).sum())} subjects from single-class sites")
+    print(f"connectivity ({args.connectivity}): {connectivity.shape}\n")
 
     names = ["QCNN", "VQC", "QSVM-Pegasos", "QSVM-fixed", "TQEK",
              "CNN (1-D)", "MLP", "SVM-RBF", "Trainable-RBF"]
@@ -209,30 +224,31 @@ def main() -> int:
 
         n_test = len(test_idx)
 
-        def record(name, preds, scores, elapsed,
+        def record(name, preds, scores, elapsed, train_acc=None,
                    _site=site, _n=n_test, _y=y_test):
             # Loop variables are bound as defaults: a late-binding closure here
             # would attribute results to whichever fold happened to be current.
             per_fold[name].append(
-                {"site": _site, "n": _n, **metrics(_y, preds, scores)}
+                {"site": _site, "n": _n, "train_accuracy": train_acc,
+                 **metrics(_y, preds, scores)}
             )
             timing[name] += elapsed
 
         # ---- QCNN -------------------------------------------------------
         t0 = time.perf_counter()
-        preds, scores = train_torch_classifier(
+        preds, scores, train_acc = train_torch_classifier(
             QCNNClassifier(n_qubits=args.qubits, seed=args.seed),
             v_train, y_train, v_test, epochs=args.epochs, seed=args.seed,
         )
-        record("QCNN", preds, scores, time.perf_counter() - t0)
+        record("QCNN", preds, scores, time.perf_counter() - t0, train_acc)
 
         # ---- VQC: ZZ feature map + RealAmplitudes + parity ---------------
         t0 = time.perf_counter()
-        preds, scores = train_torch_classifier(
+        preds, scores, train_acc = train_torch_classifier(
             VQC(n_qubits=args.qubits, reps=2, seed=args.seed),
             v_train, y_train, v_test, epochs=args.epochs, seed=args.seed,
         )
-        record("VQC", preds, scores, time.perf_counter() - t0)
+        record("VQC", preds, scores, time.perf_counter() - t0, train_acc)
 
         # ---- classical MLP, matched budget --------------------------------
         t0 = time.perf_counter()
@@ -240,18 +256,18 @@ def main() -> int:
             torch.nn.Linear(args.qubits, 32), torch.nn.ReLU(),
             torch.nn.Dropout(0.2), torch.nn.Linear(32, 2),
         )
-        preds, scores = train_torch_classifier(
+        preds, scores, train_acc = train_torch_classifier(
             mlp, x_train, y_train, x_test, epochs=args.epochs, seed=args.seed
         )
-        record("MLP", preds, scores, time.perf_counter() - t0)
+        record("MLP", preds, scores, time.perf_counter() - t0, train_acc)
 
         # ---- classical CNN, matched budget -------------------------------
         t0 = time.perf_counter()
-        preds, scores = train_torch_classifier(
+        preds, scores, train_acc = train_torch_classifier(
             Classical1DCNN(args.qubits), x_train, y_train, x_test,
             epochs=args.epochs, seed=args.seed,
         )
-        record("CNN (1-D)", preds, scores, time.perf_counter() - t0)
+        record("CNN (1-D)", preds, scores, time.perf_counter() - t0, train_acc)
 
         # ---- fixed quantum kernel, bandwidth by alignment ----------------
         t0 = time.perf_counter()
@@ -270,7 +286,8 @@ def main() -> int:
         k_test = quantum_kernel_matrix(a_test, a_train, fm)
         model = SVC(kernel="precomputed", C=1.0, class_weight="balanced").fit(k_train, y_train)
         raw = model.decision_function(k_test)
-        record("QSVM-fixed", (raw > 0).astype(int), raw, time.perf_counter() - t0)
+        record("QSVM-fixed", (raw > 0).astype(int), raw, time.perf_counter() - t0,
+               float(((model.decision_function(k_train) > 0).astype(int) == y_train).mean()))
 
         # ---- Pegasos QSVC on the same precomputed kernel ------------------
         t0 = time.perf_counter()
@@ -280,7 +297,8 @@ def main() -> int:
             pegasos = PegasosQSVC(C=1.0, num_steps=200, precomputed=True, seed=args.seed)
             pegasos.fit(k_train, y_train)
             preds = pegasos.predict(k_test)
-            record("QSVM-Pegasos", preds, None, time.perf_counter() - t0)
+            record("QSVM-Pegasos", preds, None, time.perf_counter() - t0,
+                   float((pegasos.predict(k_train) == y_train).mean()))
         except Exception as exc:  # noqa: BLE001 - optional dependency path
             print(f"    ! Pegasos unavailable: {exc.__class__.__name__}")
 
@@ -292,7 +310,8 @@ def main() -> int:
         kq_test = gram_matrix(tqek, a_test, a_train)
         model = SVC(kernel="precomputed", C=1.0, class_weight="balanced").fit(kq_train, y_train)
         raw = model.decision_function(kq_test)
-        record("TQEK", (raw > 0).astype(int), raw, time.perf_counter() - t0)
+        record("TQEK", (raw > 0).astype(int), raw, time.perf_counter() - t0,
+               float(((model.decision_function(kq_train) > 0).astype(int) == y_train).mean()))
 
         # ---- trainable classical metric kernel, identical budget ----------
         t0 = time.perf_counter()
@@ -302,14 +321,16 @@ def main() -> int:
         kc_test = gram_matrix(tck, x_test, x_train)
         model = SVC(kernel="precomputed", C=1.0, class_weight="balanced").fit(kc_train, y_train)
         raw = model.decision_function(kc_test)
-        record("Trainable-RBF", (raw > 0).astype(int), raw, time.perf_counter() - t0)
+        record("Trainable-RBF", (raw > 0).astype(int), raw, time.perf_counter() - t0,
+               float(((model.decision_function(kc_train) > 0).astype(int) == y_train).mean()))
 
         # ---- tuned classical RBF -----------------------------------------
         t0 = time.perf_counter()
         model = SVC(kernel="rbf", C=1.0, gamma="scale",
                     class_weight="balanced").fit(x_train, y_train)
         raw = model.decision_function(x_test)
-        record("SVM-RBF", (raw > 0).astype(int), raw, time.perf_counter() - t0)
+        record("SVM-RBF", (raw > 0).astype(int), raw, time.perf_counter() - t0,
+               float(((model.decision_function(x_train) > 0).astype(int) == y_train).mean()))
 
         print(f"  {site:<12} n={len(test_idx):<4} " + "  ".join(
             f"{n.split()[0][:5]}={per_fold[n][-1]['accuracy']:.3f}"
@@ -358,7 +379,7 @@ def main() -> int:
 
     payload = {
         "config": vars(args) | {"data_root": str(args.data_root), "out": str(out_dir)},
-        "n_subjects": len(dataset),
+        "n_subjects": int(len(labels)),
         "summary": {n: {m: summarise(per_fold[n], m) for m in ("accuracy", "f1", "auc")}
                     for n in names if per_fold[n]},
         "seconds_per_fold": {n: timing[n] / max(len(per_fold[n]), 1)
